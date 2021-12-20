@@ -184,6 +184,7 @@
             <strong>Copyright &copy; 2014-2021 <a href="#">KinoCMS</a>.</strong> All rights reserved.
         </footer>
     </div>
+    </body>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->
 
@@ -311,6 +312,6 @@
     </script>
 
 
-    </body>
+<#--    </body>-->
     </html>
 </#macro>

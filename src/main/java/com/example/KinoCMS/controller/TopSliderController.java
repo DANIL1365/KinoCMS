@@ -5,15 +5,18 @@ import com.example.KinoCMS.domain.TopSlider;
 import com.example.KinoCMS.repos.TopSliderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -24,6 +27,28 @@ public class TopSliderController {
 
     @Value("${upload.path}")
     private String uploadPath;
+
+//    @ResponseBody
+//    @GetMapping(value = "/img/TopSlider/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+//    public byte[] img(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
+//
+//        Optional<TopSlider> topSliderSearchResult = topSliderRepo.findById(id);
+//
+//        if(topSliderSearchResult.isPresent()) {
+//            TopSlider topSlider = topSliderSearchResult.get();
+//            if (topSlider.getFifthTopImage() != null  && topSlider.getFirstTopImage().length > 0){
+//                byte[] img = topSlider.getFifthTopImage();
+//
+//                response.setContentType("image/jpeg");
+//                response.setContentLength(img.length);
+//                response.getOutputStream().write(img);
+//
+//                return topSlider.getId();
+//            }
+//        }
+//
+//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image Not Found");
+//    }
 
     @GetMapping("/bannersTop")
     public String sliderAdd(){

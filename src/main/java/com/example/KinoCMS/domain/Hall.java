@@ -32,9 +32,9 @@ public class Hall {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_creation")
     private LocalDate dateCreation;
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cinemas_id")
-    private Cinemas cinemasHalls;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "cinemas_id")
+//    private Cinemas cinemasHalls;
 
     public Hall() {
     }
@@ -50,12 +50,12 @@ public class Hall {
         this.hallNumber = hallNumber;
         this.hallDescription = hallDescription;
         this.dateCreation = dateCreation;
-        this.cinemasHalls = cinemas;
+//        this.cinemasHalls = cinemas;
     }
 
-    public String getCinemasName() {
-        return cinemasHalls != null ? cinemasHalls.getNameCinema() : "<none>";
-    }
+//    public String getCinemasName() {
+//        return cinemasHalls != null ? cinemasHalls.getNameCinema() : "<none>";
+//    }
 
     public Long getId() {
         return id;
@@ -145,11 +145,11 @@ public class Hall {
         this.dateCreation = dateCreation;
     }
 
-    public Cinemas getCinemasHalls() {
-        return cinemasHalls;
-    }
-
-    public void setCinemasHalls(Cinemas cinemasHalls) {
-        this.cinemasHalls = cinemasHalls;
-    }
+//    public Cinemas getCinemasHalls() {
+//        return cinemasHalls;
+//    }
+//
+//    public void setCinemasHalls(Cinemas cinemasHalls) {
+//        this.cinemasHalls = cinemasHalls;
+//    }
 }

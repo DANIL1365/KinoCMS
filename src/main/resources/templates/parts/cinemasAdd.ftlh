@@ -1,17 +1,38 @@
+
 <#macro cinemasAdd path>
-    <form action="${path}" method="post" enctype="multipart/form-data" xmlns="http://www.w3.org/1999/html">
+    <form action="${path}" method="post" enctype="multipart/form-data">
         <div class="form-group mt-3">
             <div class="form-group mt-2 ">
                 <label class="form-label" for="nameCinema">Название кинотеатра</label>
-                <input type="text" id="nameCinema" name="nameCinema" class="form-control" value="${nameCinema?ifExists}" placeholder="Введите название кинотеатра" />
+                <input type="text" name="nameCinema" class="form-control ${(nameCinemaError??)?string('is-invalid', '')}"
+                       value="<#if cinema??>${cinema.nameCinema}</#if>" placeholder="Введите название кинотеатра" />
+                <#if nameCinemaError??>
+                    <div class="invalid-feedback">
+                        ${nameCinemaError}
+                    </div>
+                </#if>
             </div>
             <div class="form-group mt-2">
-                <label class="form-label" for="description">Описание</label>
-                <textarea type="text" rows="5" id="description" name="description" class="form-control" value="${description?ifExists}" placeholder="Введите описание"></textarea>
+                <label class="form-label" for="descriptionCinema">Описание</label>
+                <textarea type="text" rows="5" name="descriptionCinema" class="form-control ${(descriptionCinemaError??)?string('is-invalid', '')}"
+                          placeholder="Введите описание"></textarea>
+<#--                value="<#if cinema??>${cinema.description}</#if>"-->
+<#--                <#if descriptionCinemaError??>-->
+<#--                    <div class="invalid-feedback">-->
+<#--                        ${descriptionCinemaError}-->
+<#--                    </div>-->
+<#--                </#if>-->
             </div>
             <div class="form-group mt-2">
-                <label class="form-label" for="conditions">Условия</label>
-                <textarea type="text" rows="5" id="conditions" name="conditions" class="form-control" value="${conditions?ifExists}" placeholder="Введите условия" /></textarea>
+                <label class="form-label" for="conditionsCinema">Условия</label>
+                <textarea type="text" rows="5" name="conditionsCinema" class="form-control ${(conditionsCinemaError??)?string('is-invalid', '')}"
+                           placeholder="Введите условия"></textarea>
+<#--                value="<#if cinema??>${cinema.conditions}</#if>"-->
+<#--                <#if conditionsCinemaError??>-->
+<#--                    <div class="invalid-feedback">-->
+<#--                        ${conditionsCinemaError}-->
+<#--                    </div>-->
+<#--                </#if>-->
             </div>
             <div class="form-group mt-2">
                 <div class="custom-file">
@@ -56,55 +77,6 @@
                     <input type="file" class="form-control" name="pictureGalleryFive" id="pictureGalleryFive">
                 </div>
             </div>
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="card card-primary">
-                                <div class="card-header">
-                                    <h3 class="card-title">Список пользователей</h3>
-                                </div>
-                                <!-- /.card-header -->
-                                <div class="card-body">
-                                    <table id="example2" class="table table-bordered table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th>Название</th>
-                                            <th>Дата создания</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <#list halls as hall>
-                                        <tr>
-                                            <td>${hall.hallNumber!" "}</td>
-                                            <td>${hall.dateCreation!" "}</td>
-                                            <td><a href="/cinemas/${hall.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a> <a href="#"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
-                                        </tr>
-
-                                        </#list>
-                                        </tr>
-                                        <a href="/hallAdd"><button type="submit" class="btn btn-primary">Add new hall</button></a>
-                                        </tbody>
-                                        <#--                                <tfoot>-->
-                                        <#--                                <tr>-->
-                                        <#--                                    <th>Rendering engine</th>-->
-                                        <#--                                    <th>Browser</th>-->
-                                        <#--                                    <th>Platform(s)</th>-->
-                                        <#--                                    <th>Engine version</th>-->
-                                        <#--                                    <th>CSS grade</th>-->
-                                        <#--                                </tr>-->
-                                        <#--                                </tfoot>-->
-                                    </table>
-                                </div>
-                                <!-- /.card-body -->
-                            </div>
-                            <!-- /.card -->
-                        </div>
-                    </div>
-                </div>
-            </section>
             <input type="hidden" name="_csrf" value="${_csrf.token}" />
             <div class="form-group mt-2">
                 <button type="submit" class="btn btn-primary">Добавить</button>

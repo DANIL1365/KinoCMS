@@ -41,6 +41,12 @@ public class MainController {
         return "greeting";
     }
 
+    @GetMapping("/userPart")
+    public String userPart(Map<String, Object> model) {
+
+        return "userPartMain";
+    }
+
     @GetMapping("/main")
     public String main(@RequestParam(required = false, defaultValue = "") String filter, Model model){
         Iterable<CurrentFilms> films = filmsService.getAllCurrentFilms();
@@ -100,7 +106,7 @@ public class MainController {
             @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
             @RequestParam String trailerLink,
             @RequestParam String typeCinema, Map<String, Object> model) throws IOException {
-       CurrentFilms film = new CurrentFilms(nameCinema, description, trailerLink, typeCinema, user);
+       CurrentFilms currentFilms = new CurrentFilms(nameCinema, description, trailerLink, typeCinema, user);
 
        if (mainPicture != null  && !mainPicture.getOriginalFilename().isEmpty()) {
            File uploadDirMain = new File(uploadPath);
@@ -113,7 +119,7 @@ public class MainController {
 
            mainPicture.transferTo(new File(uploadPath + "/" + resultFilenameMain));
 
-           film.setMainPicture(resultFilenameMain);
+           currentFilms.setMainPicture(resultFilenameMain);
        }
         if (pictureGalleryOne != null   && !pictureGalleryOne.getOriginalFilename().isEmpty()) {
             File uploadDirGalleryOne = new File(uploadPath);
@@ -126,7 +132,7 @@ public class MainController {
 
             pictureGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
 
-            film.setPictureGalleryOne(resultFilenameGalleryOne);
+            currentFilms.setPictureGalleryOne(resultFilenameGalleryOne);
         }
         if (pictureGalleryTwo != null   && !pictureGalleryTwo.getOriginalFilename().isEmpty()) {
             File uploadDirGalleryTwo = new File(uploadPath);
@@ -139,7 +145,7 @@ public class MainController {
 
             pictureGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
 
-            film.setPictureGalleryTwo(resultFilenameGalleryTwo);
+            currentFilms.setPictureGalleryTwo(resultFilenameGalleryTwo);
         }
         if (pictureGalleryThree != null   && !pictureGalleryThree.getOriginalFilename().isEmpty()) {
             File uploadDirGalleryThree = new File(uploadPath);
@@ -152,7 +158,7 @@ public class MainController {
 
             pictureGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
 
-            film.setPictureGalleryThree(resultFilenameGalleryThree);
+            currentFilms.setPictureGalleryThree(resultFilenameGalleryThree);
         }
         if (pictureGalleryFour != null   && !pictureGalleryFour.getOriginalFilename().isEmpty()) {
             File uploadDirGalleryFour = new File(uploadPath);
@@ -165,7 +171,7 @@ public class MainController {
 
             pictureGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
 
-            film.setPictureGalleryFour(resultFilenameGalleryFour);
+            currentFilms.setPictureGalleryFour(resultFilenameGalleryFour);
         }
         if (pictureGalleryFive != null   && !pictureGalleryFive.getOriginalFilename().isEmpty()) {
             File uploadDirGalleryFive = new File(uploadPath);
@@ -178,10 +184,10 @@ public class MainController {
 
             pictureGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
 
-            film.setPictureGalleryFive(resultFilenameGalleryFive);
+            currentFilms.setPictureGalleryFive(resultFilenameGalleryFive);
         }
 
-       filmsService.createCurrentFilm(film);
+       filmsService.createCurrentFilm(currentFilms);
 
         Iterable<CurrentFilms> films = filmsService.getAllCurrentFilms();
 

@@ -11,6 +11,10 @@ import java.util.Date;
 import java.util.Set;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+//import javax.validation.constraints.Email;
+//import javax.validation.constraints.NotBlank;
+//import javax.validation.constraints.Email;
+//import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name ="user")
@@ -19,13 +23,25 @@ public class User implements UserDetails {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 
+//    @NotBlank(message = " Name cannot be empty")
     private String name;
+//    @NotBlank(message = " Surname cannot be empty")
     private String surname;
+//    @NotBlank(message = " Alias cannot be empty")
     private String alias;
+//    @Email(message = "Email is not correct")
+//    @NotBlank(message = " Email cannot be empty")
     private String email;
+//    @NotBlank(message = " Address cannot be empty")
     private String address;
+//    @NotBlank(message = " Password cannot be empty")
     private String password;
+//    @Transient
+//    @NotBlank(message = " Password confirmation cannot be empty")
+//    private String password2;
+//    @NotBlank(message = " Number phone cannot be empty")
     private Integer numberPhone;
+//    @NotBlank(message = " Date birth cannot be empty")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateBirth;
     private boolean active;
@@ -181,4 +197,12 @@ public class User implements UserDetails {
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+
+//    public String getPassword2() {
+//        return password2;
+//    }
+//
+//    public void setPassword2(String password2) {
+//        this.password2 = password2;
+//    }
 }

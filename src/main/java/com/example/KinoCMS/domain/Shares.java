@@ -39,6 +39,14 @@ public class Shares {
         this.videoLink = videoLink;
     }
 
+    public Shares(Long id, String nameShares, LocalDate publicationDate, String description, String videoLink) {
+        this.id = id;
+        this.nameShares = nameShares;
+        this.publicationDate = publicationDate;
+        this.description = description;
+        this.videoLink = videoLink;
+    }
+
     public Long getId() {
         return id;
     }

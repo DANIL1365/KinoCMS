@@ -23,14 +23,40 @@
                                     </thead>
                                     <tbody>
                                     <tr>
+                                        <#list mainPage as mainPages>
+                                    <tr>
+                                        <td>Главная страница</td>
+                                        <td>${mainPages.dateMainCreation!" "}</td>
+                                        <td>Статус</td>
+                                        <td><a href="/mainPage/${mainPages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+
+                                    </tr>
+
+                                    </#list>
+
                                         <#list page as pagePages>
                                     <tr>
                                         <td>${pagePages.namePage!" "}</td>
                                         <td>${pagePages.dateCreation!" "}</td>
                                         <td>Статус</td>
                                         <td><a href="/pagePages/${pagePages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+                                            <#if (pagePages.id > 193)>
                                             <a href="/deletePage/${pagePages.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
+                                        <#else>
+
+                                        </#if>
                                     </tr>
+
+                                    </#list>
+
+                                    <#list contactPage as contactPage>
+                                        <tr>
+                                            <td>Контакты</td>
+                                            <td>${contactPage.dateCreation!" "}</td>
+                                            <td>Статус</td>
+                                            <td><a href="/contactPage/${contactPage.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+
+                                        </tr>
 
                                     </#list>
                                     </tr>

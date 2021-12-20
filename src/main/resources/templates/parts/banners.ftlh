@@ -78,23 +78,6 @@
             </div>
         </div>
     </form>
-    <form method="get" action="/banners" class="row g-3">
-    <div class="row row-cols-1 row-cols-md-4 g-4 mt-2">
-        <#list mainImageBanners as mainImageBanner>
-            <div class="col">
-                <div class="card">
-                    <#if mainImageBanner.pictureBanner??>
-                        <img src="/img/${mainImageBanner.pictureBanner}" class="card-img-top">
-                    </#if>
-                    <div class="card-body">
-                        <a href="/deleteBanner/${mainImageBanner.id}"><button type="submit" class="btn btn-primary">Delete</button></a>
-                    </div>
-                </div>
-            </div>
-        <#else>
-        </#list>
-    </div>
-    </form>
     </#macro>
 
 <#macro bannersBottom path>

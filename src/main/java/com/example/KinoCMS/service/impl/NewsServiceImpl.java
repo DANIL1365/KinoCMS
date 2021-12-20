@@ -4,7 +4,6 @@ package com.example.KinoCMS.service.impl;
 import com.example.KinoCMS.domain.News;
 import com.example.KinoCMS.repos.NewsRepo;
 import com.example.KinoCMS.service.NewsService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

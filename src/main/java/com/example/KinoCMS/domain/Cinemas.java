@@ -1,6 +1,10 @@
 package com.example.KinoCMS.domain;
 
+
+//import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name ="cinemas")
@@ -8,10 +12,18 @@ public class Cinemas {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+
+    @NotBlank(message = " Name cinema cannot be empty")
     @Column(name = "name_cinema")
     private String nameCinema;
-    private String description;
-    private String conditions;
+//    @NotBlank(message = " Description cannot be empty")
+//    @Length(max = 400, message = "Text too long")
+    @Column(name = "description")
+    private String descriptionCinema;
+//    @NotBlank(message = " Conditions cannot be empty")
+//    @Length(max = 400, message = "Text too long")
+    @Column(name = "conditions")
+    private String conditionsCinema;
     @Column(name = "logo")
     private String logo;
     @Column(name = "top_banner")
@@ -30,12 +42,18 @@ public class Cinemas {
     public Cinemas() {
     }
 
-    public Cinemas(String nameCinema, String description, String conditions) {
+    public Cinemas(String nameCinema, String descriptionCinema, String conditionsCinema) {
         this.nameCinema = nameCinema;
-        this.description = description;
-        this.conditions = conditions;
+        this.descriptionCinema = descriptionCinema;
+        this.conditionsCinema = conditionsCinema;
     }
 
+    public Cinemas(Long id, String nameCinema, String descriptionCinema, String conditionsCinema) {
+        this.id = id;
+        this.nameCinema = nameCinema;
+        this.descriptionCinema = descriptionCinema;
+        this.conditionsCinema = conditionsCinema;
+    }
 
     public Long getId() {
         return id;
@@ -53,20 +71,20 @@ public class Cinemas {
         this.nameCinema = nameCinema;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescriptionCinema() {
+        return descriptionCinema;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescriptionCinema(String descriptionCinema) {
+        this.descriptionCinema = descriptionCinema;
     }
 
-    public String getConditions() {
-        return conditions;
+    public String getConditionsCinema() {
+        return conditionsCinema;
     }
 
-    public void setConditions(String conditions) {
-        this.conditions = conditions;
+    public void setConditionsCinema(String conditionsCinema) {
+        this.conditionsCinema = conditionsCinema;
     }
 
     public String getLogo() {
@@ -125,4 +143,20 @@ public class Cinemas {
         this.pictureGalleryFive = pictureGalleryFive;
     }
 
+    @Override
+    public String toString() {
+        return "Cinemas{" +
+                "id=" + id +
+                ", nameCinema='" + nameCinema + '\'' +
+                ", descriptionCinema='" + descriptionCinema + '\'' +
+                ", conditionsCinema='" + conditionsCinema + '\'' +
+                ", logo='" + logo + '\'' +
+                ", topBanner='" + topBanner + '\'' +
+                ", pictureGalleryOne='" + pictureGalleryOne + '\'' +
+                ", pictureGalleryTwo='" + pictureGalleryTwo + '\'' +
+                ", pictureGalleryThree='" + pictureGalleryThree + '\'' +
+                ", pictureGalleryFour='" + pictureGalleryFour + '\'' +
+                ", pictureGalleryFive='" + pictureGalleryFive + '\'' +
+                '}';
+    }
 }

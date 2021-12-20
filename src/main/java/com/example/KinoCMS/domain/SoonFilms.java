@@ -6,7 +6,6 @@ import java.io.Serializable;
 @Entity
 @Table(name ="soon_films")
 public class SoonFilms implements Serializable {
-//    private static final long serialVersionUID = 64965117;
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -44,10 +43,15 @@ public class SoonFilms implements Serializable {
 //        this.soonAuthor = user;
     }
 
+    public SoonFilms(Long id, String nameSoonCinema, String description, String trailerLink, String typeCinema, User user) {
+        this.id = id;
+        this.nameSoonCinema = nameSoonCinema;
+        this.description = description;
+        this.trailerLink = trailerLink;
+        this.typeCinema = typeCinema;
+    }
 
-
-
-//    public String getAuthorName() {
+    //    public String getAuthorName() {
 //        return soonAuthor != null ? soonAuthor.getUsername() : "<none>";
 //    }
 

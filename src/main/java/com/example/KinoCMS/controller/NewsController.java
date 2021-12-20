@@ -6,7 +6,6 @@ import com.example.KinoCMS.domain.News;
 import com.example.KinoCMS.domain.Shares;
 import com.example.KinoCMS.repos.NewsRepo;
 import com.example.KinoCMS.service.NewsService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;

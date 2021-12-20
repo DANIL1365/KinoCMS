@@ -1,9 +1,10 @@
 package com.example.KinoCMS.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
-@Table(name ="main_page")
+@Table(name ="mainPage")
 public class MainPage {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -15,19 +16,25 @@ public class MainPage {
     @Column(name = "seo_text")
     private String seoText;
     @Column(name = "date_creation")
-    private String dateCreation;
+    private LocalDate dateMainCreation;
 
     public MainPage() {
     }
 
-    public MainPage(Long id, String numberOne, String numberTwo, String seoText, String dateCreation) {
+    public MainPage(Long id, String numberOne, String numberTwo, String seoText, LocalDate dateMainCreation) {
         this.id = id;
         this.numberOne = numberOne;
         this.numberTwo = numberTwo;
         this.seoText = seoText;
-        this.dateCreation = dateCreation;
+        this.dateMainCreation = dateMainCreation;
     }
 
+    public MainPage(String numberOne, String numberTwo, String seoText, LocalDate dateMainCreation) {
+        this.numberOne = numberOne;
+        this.numberTwo = numberTwo;
+        this.seoText = seoText;
+        this.dateMainCreation = dateMainCreation;
+    }
 
     public Long getId() {
         return id;
@@ -61,11 +68,11 @@ public class MainPage {
         this.seoText = seoText;
     }
 
-    public String getDateCreation() {
-        return dateCreation;
+    public LocalDate getDateMainCreation() {
+        return dateMainCreation;
     }
 
-    public void setDateCreation(String dateCreation) {
-        this.dateCreation = dateCreation;
+    public void setDateMainCreation(LocalDate dateMainCreation) {
+        this.dateMainCreation = dateMainCreation;
     }
 }

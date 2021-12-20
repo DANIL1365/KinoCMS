@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 
 <@c.page>
-    <form action="/pagePages" method="post" enctype="multipart/form-data">
+    <form action="/pagePages/updatePage" method="post" enctype="multipart/form-data">
         <section class="content">
             <div class="container-fluid">
                 <div class="row">

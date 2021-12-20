@@ -24,7 +24,7 @@
                 </#if>
                 <div class="card-body">
                     <h5 class="card-title"><span>${newsAdd.nameNews}</span></h5>
-<#--                    <a href="/news/${newsAdd.id}"><button class="btn btn-primary">Update</button></a>-->
+                    <a href="/news/${newsAdd.id}"><button type="submit" class="btn btn-primary">Update</button></a>
                     <a href="/delete/${newsAdd.id}"><button type="submit" class="btn btn-primary">Delete</button></a>
                 </div>
             </div>

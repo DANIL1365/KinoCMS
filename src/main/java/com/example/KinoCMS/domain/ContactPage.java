@@ -1,6 +1,7 @@
 package com.example.KinoCMS.domain;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name ="contact_page")
@@ -14,7 +15,7 @@ public class ContactPage {
     @Column(name = "address")
     private String address;
     @Column(name = "date_creation")
-    private String dateCreation;
+    private LocalDate dateCreation;
     @Column(name = "map_coordinates")
     private String mapCoordinates;
     @Column(name = "contact_logo")
@@ -23,7 +24,7 @@ public class ContactPage {
     public ContactPage() {
     }
 
-    public ContactPage(Long id, String nameCinema, String address, String dateCreation, String mapCoordinates, String contactLogo) {
+    public ContactPage(Long id, String nameCinema, String address, LocalDate dateCreation, String mapCoordinates, String contactLogo) {
         this.id = id;
         this.nameCinema = nameCinema;
         this.address = address;
@@ -31,6 +32,22 @@ public class ContactPage {
         this.mapCoordinates = mapCoordinates;
         this.contactLogo = contactLogo;
     }
+
+    public ContactPage(Long id, String nameCinema, String address, LocalDate dateCreation, String mapCoordinates) {
+        this.id = id;
+        this.nameCinema = nameCinema;
+        this.address = address;
+        this.dateCreation = dateCreation;
+        this.mapCoordinates = mapCoordinates;
+    }
+
+    public ContactPage(String nameCinema, String address, LocalDate dateCreation, String mapCoordinates) {
+        this.nameCinema = nameCinema;
+        this.address = address;
+        this.dateCreation = dateCreation;
+        this.mapCoordinates = mapCoordinates;
+    }
+
 
     public Long getId() {
         return id;
@@ -56,11 +73,11 @@ public class ContactPage {
         this.address = address;
     }
 
-    public String getDateCreation() {
+    public LocalDate getDateCreation() {
         return dateCreation;
     }
 
-    public void setDateCreation(String dateCreation) {
+    public void setDateCreation(LocalDate dateCreation) {
         this.dateCreation = dateCreation;
     }
 

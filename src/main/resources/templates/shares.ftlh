@@ -24,7 +24,7 @@
                     </#if>
                     <div class="card-body">
                         <h5 class="card-title"><span>${shares.nameShares}</span></h5>
-<#--                        <a href="/news/${shares.id}"><button class="btn btn-primary">Update</button></a>-->
+                        <a href="/shares/${shares.id}"><button type="submit" class="btn btn-primary">Update</button></a>
                         <a href="/deleteShares/${shares.id}"><button type="submit" class="btn btn-primary">Delete</button></a>
                         <#--            <span>${film.description}</span>-->
 

@@ -4,35 +4,15 @@
         <div class="form-group mt-3">
             <div class="form-group mt-2 ">
                 <label class="form-label" for="nameCinema">Название кинотеатра</label>
-                <input type="text" name="nameCinema" class="form-control ${(nameCinemaError??)?string('is-invalid', '')}"
-                       value="<#if cinema??>${cinema.nameCinema}</#if>" placeholder="Введите название кинотеатра" />
-                <#if nameCinemaError??>
-                    <div class="invalid-feedback">
-                        ${nameCinemaError}
-                    </div>
-                </#if>
+                <input type="text" name="nameCinema" id="nameCinema" class="form-control" value="${nameCinema?ifExists}" placeholder="Введите название кинотеатра" />
             </div>
             <div class="form-group mt-2">
                 <label class="form-label" for="descriptionCinema">Описание</label>
-                <textarea type="text" rows="5" name="descriptionCinema" class="form-control ${(descriptionCinemaError??)?string('is-invalid', '')}"
-                          placeholder="Введите описание"></textarea>
-<#--                value="<#if cinema??>${cinema.description}</#if>"-->
-<#--                <#if descriptionCinemaError??>-->
-<#--                    <div class="invalid-feedback">-->
-<#--                        ${descriptionCinemaError}-->
-<#--                    </div>-->
-<#--                </#if>-->
+                <textarea type="text" rows="5" id="descriptionCinema" name="descriptionCinema" class="form-control" value="${descriptionCinema?ifExists}" placeholder="Введите описание"></textarea>
             </div>
             <div class="form-group mt-2">
                 <label class="form-label" for="conditionsCinema">Условия</label>
-                <textarea type="text" rows="5" name="conditionsCinema" class="form-control ${(conditionsCinemaError??)?string('is-invalid', '')}"
-                           placeholder="Введите условия"></textarea>
-<#--                value="<#if cinema??>${cinema.conditions}</#if>"-->
-<#--                <#if conditionsCinemaError??>-->
-<#--                    <div class="invalid-feedback">-->
-<#--                        ${conditionsCinemaError}-->
-<#--                    </div>-->
-<#--                </#if>-->
+                <textarea type="text" rows="5" id="conditionsCinema" name="conditionsCinema" class="form-control" value="${conditionsCinema?ifExists}" placeholder="Введите условия"></textarea>
             </div>
             <div class="form-group mt-2">
                 <div class="custom-file">

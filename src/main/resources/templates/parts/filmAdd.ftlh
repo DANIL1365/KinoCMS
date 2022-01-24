@@ -15,7 +15,13 @@
             </div>
             <div class="form-group mt-2">
                 <label class="form-label" for="typeCinema">Тип фильма</label>
-                <input type="text" id="typeCinema" name="typeCinema" class="form-control" value="${typeCinema?ifExists}" placeholder="Введите тип фильма" />
+<#--                <input type="text" id="typeCinema" name="typeCinema" class="form-control" value="${typeCinema?ifExists}" placeholder="Введите тип фильма" />-->
+                    <select class="form-control select2" name="typeCinema" style="width: 100%;" />
+                    <option selected="selected"></option>
+                    <option>2D</option>
+                    <option>3D</option>
+                    <option>IMAX</option>
+                    </select>
             </div>
             <div class="form-group mt-2">
                 <div class="custom-file">

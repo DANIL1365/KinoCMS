@@ -26,12 +26,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 //    @Autowired
 //    private JavaMailSender mailSender;
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepo.findByUsername(username);
+
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        return user;
+    }
+
 
 
     @Override
     public boolean createUser(User user) {
 
-        User userFromDb = userRepo.findUserByName(user.getName());
+        User userFromDb = userRepo.findByUsername(user.getUsername());
         if (userFromDb != null) {
             return false;
         }
@@ -83,10 +94,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return false;
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-
-        return userRepo.findUserByName(name);
-    }
 }

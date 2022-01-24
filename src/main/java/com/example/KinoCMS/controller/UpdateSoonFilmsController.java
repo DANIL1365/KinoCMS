@@ -1,14 +1,12 @@
 package com.example.KinoCMS.controller;
 
-import com.example.KinoCMS.domain.CurrentFilms;
-import com.example.KinoCMS.domain.SoonFilms;
-import com.example.KinoCMS.domain.User;
-import com.example.KinoCMS.service.FilmsService;
-import com.example.KinoCMS.service.SoonFilmsService;
+import com.example.KinoCMS.domain.*;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,6 +22,18 @@ public class UpdateSoonFilmsController {
     @Autowired
     private SoonFilmsService soonFilmsService;
 
+    @Autowired
+    MainPageService mainPageService;
+
+    @Autowired
+    MainBannerService mainBannerService;
+
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    ContactPageService contactPageService;
+
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -34,13 +44,39 @@ public class UpdateSoonFilmsController {
         return "updateSoonFilms";
     }
 
+    @GetMapping("/edit/{id}")
+    public String soonFilmEdit(@PathVariable("id") Long id, Model model) {
+
+        SoonFilms soonFilmsUser = soonFilmsService.getSoonFilmById(id);
+
+        model.addAttribute("soonFilmsUser", soonFilmsUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getSoonFilms";
+    }
+
     @PostMapping
     public String updateSoonFilm(
             @AuthenticationPrincipal User user,
             @RequestParam("soonId") Long id,
             @RequestParam String nameSoonCinema,
             @RequestParam String description,
-            @RequestParam("mainPicture") MultipartFile mainPicture,
+            @RequestParam("mainSoonPicture") MultipartFile mainSoonPicture,
             @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
             @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
             @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
@@ -50,16 +86,16 @@ public class UpdateSoonFilmsController {
             @RequestParam String typeCinema, Map<String, Object> model) throws IOException {
         SoonFilms soonFilm = new SoonFilms(id, nameSoonCinema, description, trailerLink, typeCinema, user);
 
-        if (mainPicture != null  && !mainPicture.getOriginalFilename().isEmpty()) {
+        if (mainSoonPicture != null  && !mainSoonPicture.getOriginalFilename().isEmpty()) {
             File uploadDirMain = new File(uploadPath);
             if (!uploadDirMain.exists()) {
                 uploadDirMain.mkdir();
             }
 
             String uuidFileMain = UUID.randomUUID().toString();
-            String resultFilenameMain = uuidFileMain + "." + mainPicture.getOriginalFilename();
+            String resultFilenameMain = uuidFileMain + "." + mainSoonPicture.getOriginalFilename();
 
-            mainPicture.transferTo(new File(uploadPath + "/" + resultFilenameMain));
+            mainSoonPicture.transferTo(new File(uploadPath + "/" + resultFilenameMain));
 
             soonFilm.setMainSoonPicture(resultFilenameMain);
         }

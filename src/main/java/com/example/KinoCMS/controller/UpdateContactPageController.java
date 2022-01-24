@@ -1,12 +1,13 @@
 package com.example.KinoCMS.controller;
 
-import com.example.KinoCMS.domain.ContactPage;
-import com.example.KinoCMS.domain.MainPage;
-import com.example.KinoCMS.service.ContactPageService;
+import com.example.KinoCMS.domain.*;
+import com.example.KinoCMS.repos.BottomSliderRepo;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,24 @@ public class UpdateContactPageController {
     @Autowired
     ContactPageService contactPageService;
 
+    @Autowired
+    private CinemasService cinemasService;
+
+    @Autowired
+    HallService hallService;
+
+    @Autowired
+    MainPageService mainPageService;
+
+    @Autowired
+    MainBannerService mainBannerService;
+
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    private FilmsService filmsService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -30,6 +49,33 @@ public class UpdateContactPageController {
     public String updateContact(@PathVariable ContactPage contactPage){
         contactPageService.updateContactPage(contactPage);
         return "contactPageUpdate";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String contactEdit(@PathVariable("id") Long id, Model model) {
+
+        ContactPage contactPageUser = contactPageService.getContactPageById(id);
+
+        model.addAttribute("contactPageUser", contactPageUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getContactPage";
+
     }
 
     @PostMapping

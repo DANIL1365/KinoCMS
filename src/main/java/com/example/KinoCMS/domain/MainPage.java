@@ -1,6 +1,10 @@
 package com.example.KinoCMS.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -10,12 +14,17 @@ public class MainPage {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @Column(name = "number_one")
+    @NotBlank(message = "Number one cannot be empty")
     private String numberOne;
     @Column(name = "number_two")
+    @NotBlank(message = "Number two cannot be empty")
     private String numberTwo;
     @Column(name = "seo_text")
+    @NotBlank(message = "SEO text cannot be empty")
     private String seoText;
     @Column(name = "date_creation")
+    @NotNull(message = "Date may not be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateMainCreation;
 
     public MainPage() {

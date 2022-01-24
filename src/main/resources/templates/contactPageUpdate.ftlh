@@ -17,13 +17,13 @@
                             <form id="quickForm">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"></label>
+                                        <label class="col-sm-2 col-form-label"> Название кинотеатра : </label>
                                         <div class="col-sm-6">
                                             <input type="text" name="nameCinema" class="form-control" placeholder="" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"></label>
+                                        <label class="col-sm-2 col-form-label"> Адресс : </label>
                                         <div class="col-sm-6">
                                             <input type="text" name="address" class="form-control" placeholder="" />
                                         </div>
@@ -35,13 +35,13 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"> Дата публикации : </label>
+                                        <label class="col-sm-2 col-form-label"> Координаты : </label>
                                         <div class="col-sm-6">
                                             <input type="text" name="mapCoordinates" class="form-control" placeholder="Введите..." />
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"> Координаты : </label>
+                                        <label class="col-sm-2 col-form-label"> Лого : </label>
                                         <div class="col-sm-6">
                                             <input type="file" name="contactLogo" class="form-control" placeholder="Введите..." />
                                         </div>

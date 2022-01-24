@@ -11,6 +11,10 @@ import java.util.Date;
 import java.util.Set;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 //import javax.validation.constraints.Email;
 //import javax.validation.constraints.NotBlank;
 //import javax.validation.constraints.Email;
@@ -22,26 +26,25 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-
-//    @NotBlank(message = " Name cannot be empty")
-    private String name;
-//    @NotBlank(message = " Surname cannot be empty")
+    @NotBlank(message = "Username cannot be empty")
+    private String username;
+    @NotBlank(message = "Username cannot be empty")
     private String surname;
-//    @NotBlank(message = " Alias cannot be empty")
+    @NotBlank(message = "Username cannot be empty")
     private String alias;
-//    @Email(message = "Email is not correct")
-//    @NotBlank(message = " Email cannot be empty")
+    @Email(message = "Email is not correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
-//    @NotBlank(message = " Address cannot be empty")
+    @NotBlank(message = "Address may not be null")
     private String address;
-//    @NotBlank(message = " Password cannot be empty")
+    @NotBlank(message = "Password may not be null")
     private String password;
-//    @Transient
-//    @NotBlank(message = " Password confirmation cannot be empty")
-//    private String password2;
-//    @NotBlank(message = " Number phone cannot be empty")
+    @Transient
+    @NotBlank(message = "Password confirmation may not be null")
+    private String password2;
+    @NotNull(message = "Number may not be null")
     private Integer numberPhone;
-//    @NotBlank(message = " Date birth cannot be empty")
+    @NotNull(message = "Date may not be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateBirth;
     private boolean active;
@@ -56,8 +59,8 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String name, String surname, String alias, String email, String address, String password, Integer numberPhone, LocalDate dateBirth) {
-        this.name = name;
+    public User(String username, String surname, String alias, String email, String address, String password, Integer numberPhone, LocalDate dateBirth) {
+        this.username = username;
         this.surname = surname;
         this.alias = alias;
         this.email = email;
@@ -79,12 +82,12 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getSurname() {
@@ -165,10 +168,10 @@ public class User implements UserDetails {
         return getRoles();
     }
 
-    @Override
-    public String getUsername() {
-        return null;
-    }
+//    @Override
+//    public String getUsername() {
+//        return null;
+//    }
 
     @Override
     public boolean isAccountNonExpired() {
@@ -198,11 +201,30 @@ public class User implements UserDetails {
         this.activationCode = activationCode;
     }
 
-//    public String getPassword2() {
-//        return password2;
-//    }
-//
-//    public void setPassword2(String password2) {
-//        this.password2 = password2;
-//    }
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", surname='" + surname + '\'' +
+                ", alias='" + alias + '\'' +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", password='" + password + '\'' +
+                ", numberPhone=" + numberPhone +
+                ", dateBirth=" + dateBirth +
+                ", active=" + active +
+                ", activationCode='" + activationCode + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }

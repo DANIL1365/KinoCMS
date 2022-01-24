@@ -1,14 +1,14 @@
 package com.example.KinoCMS.controller;
 
-import com.example.KinoCMS.domain.CurrentFilms;
-import com.example.KinoCMS.domain.Shares;
-import com.example.KinoCMS.domain.User;
-import com.example.KinoCMS.service.FilmsService;
-import com.example.KinoCMS.service.SoonFilmsService;
+import com.example.KinoCMS.domain.*;
+import com.example.KinoCMS.repos.BottomSliderRepo;
+import com.example.KinoCMS.repos.TopSliderRepo;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -25,9 +25,76 @@ public class UpdateCurrentFilmsController {
     @Autowired
     private FilmsService filmsService;
 
+    @Autowired
+    MainBannerService mainBannerService;
+
+    @Autowired
+    TopSliderRepo topSliderRepo;
+
+    @Autowired
+    MainPageService mainPageService;
+
+    @Autowired
+    BottomSliderRepo bottomSliderRepo;
+
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    ContactPageService contactPageService;
+
 
     @Value("${upload.path}")
     private String uploadPath;
+
+    @GetMapping("/edit/{id}")
+    public String currentFilmEdit(@PathVariable("id") Long id, Model model) {
+
+        CurrentFilms currentFilmsUser = filmsService.getCurrentFilmById(id);
+
+        model.addAttribute("currentFilmsUser", currentFilmsUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getCurrentFilms";
+    }
+
+    @GetMapping("/editBuy/{id}")
+    public String currentFilmEditBuy(@PathVariable("id") Long id, Model model) {
+
+        CurrentFilms currentFilmsUser = filmsService.getCurrentFilmById(id);
+
+        model.addAttribute("currentFilmsUser", currentFilmsUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        return "getCurrentFilmsBuy";
+    }
+
 
     @GetMapping("{currentFilms}")
     public String updateCurrentFilm(@PathVariable CurrentFilms currentFilms) {

@@ -19,19 +19,19 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Название : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="nameCinema" class="form-control" placeholder="name shares" />
+                                            <input type="text" name="nameCinema" class="form-control" placeholder="name cinemas" />
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Описание : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="description" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="descriptionCinema" class="form-control" placeholder="Введите описание"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"> Описание : </label>
+                                        <label class="col-sm-2 col-form-label"> Условия : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="conditions" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="conditionsCinema" class="form-control" placeholder="Введите описание"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">

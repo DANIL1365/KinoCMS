@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Map;
@@ -29,23 +31,31 @@ public class UpdateMainPageController {
     @PostMapping
     public String updateMainPage(
             @RequestParam("mainPageId") Long id,
-            @RequestParam String numberOne,
-            @RequestParam String numberTwo,
-            @RequestParam String seoText,
-            @RequestParam("dateCreationMain")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateMainCreation,
-            Map<String, Object> model) throws IOException {
-        MainPage mainPages = new MainPage(id, numberOne, numberTwo, seoText, dateMainCreation);
+            @Valid MainPage mainPage, BindingResult bindingResult, Model model
+    ) throws IOException {
+        mainPage.setId(id);
+
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+
+            model.mergeAttributes(errors);
+            model.addAttribute("mainPage", mainPage);
+
+            return "mainPageUpdate";
+        } else {
+
+//            model.addAttribute("mainPage", null);
+            mainPageService.createMainPage(mainPage);
+        }
 
 
-        mainPageService.createMainPage(mainPages);
+        Iterable<MainPage> mainPages= mainPageService.getAllMainPages();
 
-        Iterable<MainPage> mainPageIterable = mainPageService.getAllMainPages();
-
-        model.put("mainPages", mainPageIterable);
+        model.addAttribute("mainPages", mainPages);
 
         return "redirect:/pagePages";
     }
+
 
 
 

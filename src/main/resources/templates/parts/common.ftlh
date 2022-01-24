@@ -36,6 +36,7 @@
         <link rel="stylesheet" href="../../plugins/datatables-buttons/css/buttons.bootstrap4.min.css" />
         <!-- dropzonejs -->
         <link rel="stylesheet" href="../../plugins/dropzone/min/dropzone.min.css" />
+        <link rel="stylesheet" href="/dist/css/alt/userPart.css" />
     </head>
     <body class="hold-transition sidebar-mini">
     <div class="wrapper">
@@ -100,12 +101,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/cinemas" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Кинотеатры
                                 </p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="/cinemas" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Кинотеатры</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/hallList" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Залы</p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a href="/news" class="nav-link">
@@ -131,7 +146,7 @@
                                 </p>
                             </a>
                         </li>
-                        <#if isAdmin>
+<#--                        <#if isAdmin>-->
                         <li class="nav-item">
                             <a href="/user" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
@@ -140,7 +155,7 @@
                                 </p>
                             </a>
                         </li>
-                        </#if>
+<#--                        </#if>-->
                         <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-book"></i>
@@ -220,6 +235,8 @@
     <script src="/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="/dist/js/pages/dashboard.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

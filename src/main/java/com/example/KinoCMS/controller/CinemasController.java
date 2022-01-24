@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 //import javax.validation.Valid;
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -69,33 +69,19 @@ public class CinemasController {
 
     @PostMapping("/cinemasAdd")
     public String addNewCinemas(
-//            @RequestParam String nameCinema,
-//            @RequestParam String descriptionCinema,
-//            @RequestParam String conditionsCinema,
-            @Valid Cinemas cinema,
-            BindingResult bindingResult,
-            Model model,
+            @RequestParam String nameCinema,
+            @RequestParam String descriptionCinema,
+            @RequestParam String conditionsCinema,
             @RequestParam("logo") MultipartFile logo,
             @RequestParam("topBanner") MultipartFile topBanner,
             @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
             @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
             @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
             @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
-            @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive
-//            Map<String, Object> model
-    ) throws IOException {
-//        Cinemas cinema = new Cinemas(nameCinema, descriptionCinema, conditionsCinema);
-    System.out.println("cinema:" + cinema);
-        if (bindingResult.hasErrors()) {
-            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
-            System.out.println("error");
+            @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
+            Map<String, Object> model) throws IOException {
+        Cinemas cinema = new Cinemas(nameCinema, descriptionCinema, conditionsCinema);
 
-            model.mergeAttributes(errorsMap);
-            model.addAttribute("cinema", cinema);
-
-            return "cinemasAdd";
-        } else {
-            System.out.println("OK");
             if (logo != null && !logo.getOriginalFilename().isEmpty()) {
                 File uploadDirlogo = new File(uploadPath);
                 if (!uploadDirlogo.exists()) {
@@ -188,15 +174,13 @@ public class CinemasController {
                 cinema.setPictureGalleryFive(resultFilenameGalleryFive);
             }
 
-            model.addAttribute("cinema", null);
 
             cinemasService.createCinemas(cinema);
 
-        }
 
         Iterable<Cinemas> cinemas1 = cinemasService.getAllCinemas();
 
-        model.addAttribute("cinemas1", cinemas1);
+        model.put("cinemas1", cinemas1);
         // model.put("filter","");
 
         return "redirect:/cinemas";

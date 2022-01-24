@@ -28,27 +28,6 @@ public class TopSliderController {
     @Value("${upload.path}")
     private String uploadPath;
 
-//    @ResponseBody
-//    @GetMapping(value = "/img/TopSlider/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
-//    public byte[] img(@PathVariable("id") Long id, HttpServletResponse response) throws IOException {
-//
-//        Optional<TopSlider> topSliderSearchResult = topSliderRepo.findById(id);
-//
-//        if(topSliderSearchResult.isPresent()) {
-//            TopSlider topSlider = topSliderSearchResult.get();
-//            if (topSlider.getFifthTopImage() != null  && topSlider.getFirstTopImage().length > 0){
-//                byte[] img = topSlider.getFifthTopImage();
-//
-//                response.setContentType("image/jpeg");
-//                response.setContentLength(img.length);
-//                response.getOutputStream().write(img);
-//
-//                return topSlider.getId();
-//            }
-//        }
-//
-//        throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image Not Found");
-//    }
 
     @GetMapping("/bannersTop")
     public String sliderAdd(){
@@ -65,7 +44,7 @@ public class TopSliderController {
             @RequestParam("secondTopImage") MultipartFile secondTopImage,
             @RequestParam("thirdTopImage") MultipartFile thirdTopImage,
             @RequestParam("fourthTopImage") MultipartFile fourthTopImage,
-            @RequestParam("fifthImage") MultipartFile fifthImage, Map<String, Object> model) throws IOException {
+            @RequestParam("fifthTopImage") MultipartFile fifthTopImage, Map<String, Object> model) throws IOException {
         TopSlider topSlider = new TopSlider();
 
         if (firstTopImage != null   && !firstTopImage.getOriginalFilename().isEmpty()) {
@@ -120,16 +99,16 @@ public class TopSliderController {
 
             topSlider.setFourthTopImage(resultFilenamefourthImage);
         }
-        if (fifthImage != null   && !fifthImage.getOriginalFilename().isEmpty()) {
+        if (fifthTopImage != null   && !fifthTopImage.getOriginalFilename().isEmpty()) {
             File uploadDirfifthImage = new File(uploadPath);
             if (!uploadDirfifthImage.exists()) {
                 uploadDirfifthImage.mkdir();
             }
 
             String uuidFilefifthImage = UUID.randomUUID().toString();
-            String resultFilenamefifthImage = uuidFilefifthImage + "." + fifthImage.getOriginalFilename();
+            String resultFilenamefifthImage = uuidFilefifthImage + "." + fifthTopImage.getOriginalFilename();
 
-            fifthImage.transferTo(new File(uploadPath + "/" + resultFilenamefifthImage));
+            fifthTopImage.transferTo(new File(uploadPath + "/" + resultFilenamefifthImage));
 
             topSlider.setFifthTopImage(resultFilenamefifthImage);
         }

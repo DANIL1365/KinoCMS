@@ -46,7 +46,7 @@ public class Hall {
         this.dateCreation = dateCreation;
     }
 
-    public Hall(String hallNumber, String hallDescription, LocalDate dateCreation, Cinemas cinemas) {
+    public Hall(String hallNumber, String hallDescription, LocalDate dateCreation) {
         this.hallNumber = hallNumber;
         this.hallDescription = hallDescription;
         this.dateCreation = dateCreation;

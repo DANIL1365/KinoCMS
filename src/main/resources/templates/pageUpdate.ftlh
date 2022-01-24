@@ -17,9 +17,16 @@
                             <form id="quickForm">
                                 <div class="card-body">
                                     <div class="form-group row">
+                                        <div class="form-group row">
+                                            <!-- Rounded switch -->
+                                            <label class="switch" for="onOf">
+                                                <input type="checkbox" id="onOf" name="onOf" value="true" class="form-control">
+                                                <span class="slider round">Вкл/Выкл</span>
+                                            </label>
+                                        </div>
                                         <label class="col-sm-2 col-form-label"> Название : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="namePage" class="form-control" placeholder="name Page" />
+                                            <input type="text" name="namePage" class="form-control" placeholder="name Page" value="<#if pagePages??>${pagePages.namePage}</#if>" />
                                         </div>
                                     </div>
                                     <div class="form-group row">

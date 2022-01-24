@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepo extends CrudRepository<User, Long> {
-    User findUserByName(String name);
+    User findByUsername(String username);
 
     @Query(value = "SELECT COUNT(id) FROM user", nativeQuery = true)
     Long getCountUser();

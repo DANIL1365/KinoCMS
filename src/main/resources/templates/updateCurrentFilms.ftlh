@@ -35,9 +35,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"> Ссылка : </label>
+                                        <label class="col-sm-2 col-form-label"> Тип фильма : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="typeCinema" class="form-control" placeholder="Введите тип фильма" />
+                                            <select class="form-control select2" name="typeCinema" style="width: 100%;" />
+                                            <option selected="selected"></option>
+                                            <option>2D</option>
+                                            <option>3D</option>
+                                            <option>IMAX</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">

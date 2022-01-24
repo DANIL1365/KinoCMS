@@ -46,9 +46,6 @@ public class SoonFilmsController {
 
     @GetMapping("/soonFilmAdd")
     public String soonFilmAdd(){
-//        Iterable<CurrentFilms> films = filmsRepo.findAll();
-//
-//        model.addAttribute("films", films);
 
         return "soonFilmAdd";
     }
@@ -58,7 +55,7 @@ public class SoonFilmsController {
             @AuthenticationPrincipal User user,
             @RequestParam String nameSoonCinema,
             @RequestParam String description,
-            @RequestParam("mainPicture") MultipartFile mainPicture,
+            @RequestParam("mainSoonPicture") MultipartFile mainSoonPicture,
             @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
             @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
             @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
@@ -68,16 +65,16 @@ public class SoonFilmsController {
             @RequestParam String typeCinema, Map<String, Object> model) throws IOException {
        SoonFilms soonFilm = new SoonFilms(nameSoonCinema, description, trailerLink, typeCinema, user);
 
-       if (mainPicture != null  && !mainPicture.getOriginalFilename().isEmpty()) {
+       if (mainSoonPicture != null  && !mainSoonPicture.getOriginalFilename().isEmpty()) {
            File uploadDirMain = new File(uploadPath);
            if (!uploadDirMain.exists()) {
                uploadDirMain.mkdir();
            }
 
            String uuidFileMain = UUID.randomUUID().toString();
-           String resultFilenameMain = uuidFileMain + "." + mainPicture.getOriginalFilename();
+           String resultFilenameMain = uuidFileMain + "." + mainSoonPicture.getOriginalFilename();
 
-           mainPicture.transferTo(new File(uploadPath + "/" + resultFilenameMain));
+           mainSoonPicture.transferTo(new File(uploadPath + "/" + resultFilenameMain));
 
            soonFilm.setMainSoonPicture(resultFilenameMain);
        }

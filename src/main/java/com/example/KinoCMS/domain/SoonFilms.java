@@ -28,9 +28,6 @@ public class SoonFilms implements Serializable {
     private String trailerLink;
     @Column(name = "type_cinema")
     private String typeCinema;
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id")
-//    private User soonAuthor;
 
     public SoonFilms() {
     }
@@ -40,7 +37,6 @@ public class SoonFilms implements Serializable {
         this.description = description;
         this.trailerLink = trailerLink;
         this.typeCinema = typeCinema;
-//        this.soonAuthor = user;
     }
 
     public SoonFilms(Long id, String nameSoonCinema, String description, String trailerLink, String typeCinema, User user) {
@@ -51,9 +47,6 @@ public class SoonFilms implements Serializable {
         this.typeCinema = typeCinema;
     }
 
-    //    public String getAuthorName() {
-//        return soonAuthor != null ? soonAuthor.getUsername() : "<none>";
-//    }
 
     public Long getId() {
         return id;
@@ -144,12 +137,5 @@ public class SoonFilms implements Serializable {
         this.typeCinema = typeCinema;
     }
 
-//    public User getSoonAuthor() {
-//        return soonAuthor;
-//    }
-//
-//    public void setSoonAuthor(User soonAuthor) {
-//        this.soonAuthor = soonAuthor;
-//    }
 
 }

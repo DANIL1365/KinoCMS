@@ -1,12 +1,12 @@
 package com.example.KinoCMS.controller;
 
-import com.example.KinoCMS.domain.News;
-import com.example.KinoCMS.domain.Shares;
-import com.example.KinoCMS.service.SharesService;
+import com.example.KinoCMS.domain.*;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +23,18 @@ public class UpdateSharesController {
     @Autowired
     private SharesService sharesService;
 
+    @Autowired
+    MainPageService mainPageService;
+
+    @Autowired
+    MainBannerService mainBannerService;
+
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    ContactPageService contactPageService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -30,6 +42,32 @@ public class UpdateSharesController {
     public String updateShares(@PathVariable Shares shares) {
         sharesService.updateShares(shares);
         return "updateShares";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String sharesEdit(@PathVariable("id") Long id, Model model) {
+
+        Shares sharesUser = sharesService.getSharesById(id);
+
+        model.addAttribute("sharesUser", sharesUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getShares";
     }
 
     @PostMapping

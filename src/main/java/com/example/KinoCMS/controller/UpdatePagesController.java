@@ -3,6 +3,7 @@ package com.example.KinoCMS.controller;
 
 import com.example.KinoCMS.domain.*;
 import com.example.KinoCMS.service.ContactPageService;
+import com.example.KinoCMS.service.MainBannerService;
 import com.example.KinoCMS.service.MainPageService;
 import com.example.KinoCMS.service.PagePagesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class UpdatePagesController {
     @Autowired
     PagePagesService pagePagesService;
 
+    @Autowired
+    MainBannerService mainBannerService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -51,7 +55,31 @@ public class UpdatePagesController {
         return "pageUpdate";
     }
 
+    @GetMapping("/edit/{id}")
+    public String pageEdit(@PathVariable("id") Long id, Model model) {
 
+        PagePages pagePagesUser = pagePagesService.getPagePagesById(id);
+
+        model.addAttribute("pagePagesUser", pagePagesUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getPage";
+    }
 
 
 //    @GetMapping("/deletePage/{id}")
@@ -68,6 +96,7 @@ public class UpdatePagesController {
             @RequestParam String description,
             @RequestParam("dateCreation")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateCreation,
+            @RequestParam(defaultValue = "false") Boolean onOf,
             @RequestParam("pagePicture") MultipartFile pagePicture,
             @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
             @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
@@ -75,7 +104,7 @@ public class UpdatePagesController {
             @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
             @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
                              Map<String, Object> model) throws IOException {
-        PagePages pagePages = new PagePages(id, namePage, description, dateCreation);
+        PagePages pagePages = new PagePages(id, namePage, description, dateCreation, onOf);
 
         if (pagePicture != null  && !pagePicture.getOriginalFilename().isEmpty()) {
             File uploadDirpagePicture = new File(uploadPath);

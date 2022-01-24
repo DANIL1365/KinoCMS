@@ -1,7 +1,8 @@
 <#import "parts/common.ftlh" as c>
-<#import "parts/registration.ftlh" as r>
+<#import "parts/login.ftlh" as r>
 
 <@c.page>
+    <div class="card-header"><h3 class="card-title">Регистрация</h3></div>
     ${messages?ifExists}
-<@r.registration "/registration" true/>
+<@r.login "/registration" true/>
 </@c.page>

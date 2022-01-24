@@ -25,27 +25,12 @@
                         <h5 class="card-title"><span>${cinema.nameCinema}</span></h5>
                         <a href="/cinemas/${cinema.id}"><button type="submit" class="btn btn-primary">Update</button></a>
                         <a href="/deleteCinema/${cinema.id}"><button type="submit" class="btn btn-primary">Delete</button></a>
-                        <#--            <span>${film.description}</span>-->
-
-
-                        <#--            <div>-->
-                        <#--                <#if film.pictureGallery??>-->
-                        <#--                    <img src="/img/${film.pictureGallery}">-->
-                        <#--                </#if>-->
-                        <#--            </div>-->
-                        <#--            <span>${film.trailerLink}</span>-->
-                        <#--            <span>${film.typeCinema}</span>-->
                     </div>
-                    <#--            <div class="card-footer text-muted">-->
-                    <#--            ${film.authorName?ifExists}-->
-                    <#--            </div>-->
                 </div>
             </div>
         <#else>
             No cinemas
         </#list>
-
-
     </div>
 
 </@c.page>

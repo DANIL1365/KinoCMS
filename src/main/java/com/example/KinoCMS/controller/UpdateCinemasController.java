@@ -1,9 +1,8 @@
 package com.example.KinoCMS.controller;
 
-import com.example.KinoCMS.domain.Cinemas;
-import com.example.KinoCMS.domain.Shares;
-import com.example.KinoCMS.service.CinemasService;
-import com.example.KinoCMS.service.HallService;
+import com.example.KinoCMS.domain.*;
+import com.example.KinoCMS.repos.BottomSliderRepo;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -26,6 +25,24 @@ public class UpdateCinemasController {
     @Autowired
     HallService hallService;
 
+    @Autowired
+    MainPageService mainPageService;
+
+    @Autowired
+    BottomSliderRepo bottomSliderRepo;
+
+    @Autowired
+    MainBannerService mainBannerService;
+
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    private FilmsService filmsService;
+
+    @Autowired
+    ContactPageService contactPageService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -35,12 +52,46 @@ public class UpdateCinemasController {
         return "cinemasUpdate";
     }
 
+    @GetMapping("/edit/{id}")
+    public String cinemasEdit(@PathVariable("id") Long id, Model model) {
+
+        Cinemas cinemasUser = cinemasService.getCinemasById(id);
+
+        model.addAttribute("cinemasUser", cinemasUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<Hall> halls = hallService.getAllHall();
+
+        model.addAttribute("halls", halls);
+
+        Iterable<CurrentFilms> timeTableFilms = filmsService.getAllCurrentFilms();
+
+        model.addAttribute("timeTableFilms", timeTableFilms);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getCinemas";
+    }
+
     @PostMapping
     public String updateCinemas(
             @RequestParam("cinemasId") Long id,
             @RequestParam String nameCinema,
-            @RequestParam String description,
-            @RequestParam String conditions,
+            @RequestParam String descriptionCinema,
+            @RequestParam String conditionsCinema,
             @RequestParam("logo") MultipartFile logo,
             @RequestParam("topBanner") MultipartFile topBanner,
             @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
@@ -49,7 +100,7 @@ public class UpdateCinemasController {
             @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
             @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
             Map<String, Object> model) throws IOException {
-        Cinemas cinema = new Cinemas(id, nameCinema, description, conditions);
+        Cinemas cinema = new Cinemas(id, nameCinema, descriptionCinema, conditionsCinema);
 
         if (logo != null  && !logo.getOriginalFilename().isEmpty()) {
             File uploadDirlogo = new File(uploadPath);

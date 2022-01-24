@@ -28,7 +28,7 @@
                                 <tr>
                                     <#list users as user>
                                 <tr>
-                                    <td>${user.name!" "}</td>
+                                    <td>${user.username!" "}</td>
                                     <td>${user.surname!" "}</td>
                                     <td>${user.alias!" "}</td>
                                     <td>${user.email!" "}</td>
@@ -43,15 +43,6 @@
                                 </tr>
 
                                 </tbody>
-<#--                                <tfoot>-->
-<#--                                <tr>-->
-<#--                                    <th>Rendering engine</th>-->
-<#--                                    <th>Browser</th>-->
-<#--                                    <th>Platform(s)</th>-->
-<#--                                    <th>Engine version</th>-->
-<#--                                    <th>CSS grade</th>-->
-<#--                                </tr>-->
-<#--                                </tfoot>-->
                             </table>
                         </div>
                         <!-- /.card-body -->

@@ -5,11 +5,16 @@ import com.example.KinoCMS.domain.User;
 import com.example.KinoCMS.repos.UserRepo;
 import com.example.KinoCMS.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Map;
@@ -19,12 +24,13 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
-public class UserController {
+public class UserController implements WebMvcConfigurer {
     @Autowired
     private UserRepo userRepo;
 
     @Autowired
     private UserService userService;
+
 
     @GetMapping
     public String userList(Model model) {
@@ -48,25 +54,28 @@ public class UserController {
 
     @PostMapping
     public String userSave(
-            @RequestParam String name,
+            @RequestParam String username,
             @RequestParam String surname,
             @RequestParam String alias,
             @RequestParam String email,
             @RequestParam String address,
             @RequestParam String password,
             @RequestParam Integer numberPhone,
-//            @RequestParam LocalDate dateBirth,
+            @RequestParam("dateBirth")
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateBirth,
             @RequestParam Map<String, String> form,
-            @RequestParam("userId") User user){
+            @RequestParam("userId") User user
+    ){
 
-        user.setName(name);
+
+        user.setUsername(username);
         user.setSurname(surname);
         user.setAlias(alias);
         user.setEmail(email);
         user.setAddress(address);
         user.setPassword(password);
         user.setNumberPhone(numberPhone);
-//        user.setDateBirth(dateBirth);
+        user.setDateBirth(dateBirth);
 
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)

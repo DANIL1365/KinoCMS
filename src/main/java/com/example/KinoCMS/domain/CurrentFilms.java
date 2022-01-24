@@ -4,7 +4,8 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name ="currentFilms")
+@Table(name ="current_films")
+
 public class CurrentFilms implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
@@ -153,4 +154,20 @@ public class CurrentFilms implements Serializable {
 //        this.author = author;
 //    }
 
+    @Override
+    public String toString() {
+        return "CurrentFilms{" +
+                "id=" + id +
+                ", nameCinema='" + nameCinema + '\'' +
+                ", description='" + description + '\'' +
+                ", mainPicture='" + mainPicture + '\'' +
+                ", pictureGalleryOne='" + pictureGalleryOne + '\'' +
+                ", pictureGalleryTwo='" + pictureGalleryTwo + '\'' +
+                ", pictureGalleryThree='" + pictureGalleryThree + '\'' +
+                ", pictureGalleryFour='" + pictureGalleryFour + '\'' +
+                ", pictureGalleryFive='" + pictureGalleryFive + '\'' +
+                ", trailerLink='" + trailerLink + '\'' +
+                ", typeCinema='" + typeCinema + '\'' +
+                '}';
+    }
 }

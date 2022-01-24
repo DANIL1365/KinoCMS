@@ -1,14 +1,14 @@
 package com.example.KinoCMS.controller;
 
 
-import com.example.KinoCMS.domain.CurrentFilms;
+import com.example.KinoCMS.domain.*;
 
 
-import com.example.KinoCMS.domain.SoonFilms;
-import com.example.KinoCMS.domain.User;
 import com.example.KinoCMS.repos.FilmsRepo;
 import com.example.KinoCMS.repos.SoonFilmsRepo;
+import com.example.KinoCMS.service.CinemasService;
 import com.example.KinoCMS.service.FilmsService;
+import com.example.KinoCMS.service.PagePagesService;
 import com.example.KinoCMS.service.SoonFilmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,13 +33,44 @@ public class MainController {
     @Autowired
     private SoonFilmsService soonFilmsService;
 
+    @Autowired
+    PagePagesService pagePagesService;
+
+    @Autowired
+    private CinemasService cinemasService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.put("pagePages", pagePages);
+
+        Long countFilms = filmsService.getCountCurrentFilms();
+
+        model.put("countFilms", countFilms);
+
+        Long countSoonFilms = soonFilmsService.getCountSoonFilms();
+
+        model.put("countSoonFilms", countSoonFilms);
+
+        Long countCinemas = cinemasService.getCountCinemas();
+
+        model.put("countCinemas", countCinemas);
+
         return "greeting";
     }
+
+//    @GetMapping("/getCount")
+//    public String countFilms(Model model){
+//       Long countFilms = filmsService.getCountCurrentFilms();
+//
+//        model.addAttribute("countFilms", countFilms);
+//
+//        return "greeting";
+//    }
 
     @GetMapping("/userPart")
     public String userPart(Map<String, Object> model) {

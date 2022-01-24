@@ -17,27 +17,59 @@
                             <form id="quickForm">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"></label>
+                                        <label class="col-sm-2 col-form-label">Номер телефона 1 : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="numberOne" class="form-control" placeholder="number" />
+<#--                                            <input type="text" name="numberOne" class="form-control" placeholder="number" />-->
+                                            <input type="text" name="numberOne"
+                                                   class="form-control ${(numberOneError??)?string('is-invalid', '')}"
+                                                   value="<#if mainPage??>${mainPage.numberOne}</#if>"
+                                                   placeholder="Number one" />
+                                            <#if numberOneError??>
+                                                <div class="invalid-feedback">
+                                                    ${numberOneError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"></label>
+                                        <label class="col-sm-2 col-form-label">Номер телефона 2 :</label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="numberTwo" class="form-control" placeholder="number" />
+<#--                                            <input type="text" name="numberTwo" class="form-control" placeholder="number" />-->
+                                            <input type="text" name="numberTwo"
+                                                   class="form-control ${(numberTwoError??)?string('is-invalid', '')}"
+                                                   value="<#if mainPage??>${mainPage.numberTwo}</#if>"
+                                                   placeholder="Number two" />
+                                            <#if numberTwoError??>
+                                                <div class="invalid-feedback">
+                                                    ${numberTwoError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Дата публикации : </label>
                                         <div class="col-sm-6">
-                                            <input type="date" name="dateCreationMain" class="form-control" placeholder="Введите дату" />
+<#--                                            <input type="date" name="dateCreationMain" class="form-control" placeholder="Введите дату" />-->
+                                            <input type="date" name="dateMainCreation"
+                                                   class="form-control ${(dateMainCreationError??)?string('is-invalid', '')}"
+<#--                                                   value="<#if mainPage??>${mainPage.dateMainCreation}</#if>"-->
+                                                   placeholder="dateMainCreation" />
+                                            <#if dateMainCreationError??>
+                                                <div class="invalid-feedback">
+                                                    ${dateMainCreationError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label"> Описание : </label>
+                                        <label class="col-sm-2 col-form-label"> SEO text : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="seoText" class="form-control" placeholder="Введите ..."></textarea>
+                                            <textarea rows="5" type="text" name="seoText" class="form-control ${(seoTextError??)?string('is-invalid', '')}" placeholder="Введите ..."><#if mainPage??>${mainPage.seoText}</#if></textarea>
+                                            <#if seoTextError??>
+                                                <div class="invalid-feedback">
+                                                    ${seoTextError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
 

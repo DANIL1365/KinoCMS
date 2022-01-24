@@ -26,8 +26,12 @@
                                         <#list mainPage as mainPages>
                                     <tr>
                                         <td>Главная страница</td>
-                                        <td>${mainPages.dateMainCreation!" "}</td>
-                                        <td>Статус</td>
+                                        <td>${mainPages.dateMainCreation}</td>
+                                        <td><!-- Rounded switch -->
+                                            <label class="switch" for="onOf">
+                                                <input type="checkbox" id="onOf">
+                                                <span class="slider round"></span>
+                                            </label></td>
                                         <td><a href="/mainPage/${mainPages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
 
                                     </tr>
@@ -38,7 +42,8 @@
                                     <tr>
                                         <td>${pagePages.namePage!" "}</td>
                                         <td>${pagePages.dateCreation!" "}</td>
-                                        <td>Статус</td>
+                                        <td><#if (pagePages.onOf = true)> <p>Вкл</p>
+                                        <#else><p>Выкл</p></td></#if>
                                         <td><a href="/pagePages/${pagePages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
                                             <#if (pagePages.id > 193)>
                                             <a href="/deletePage/${pagePages.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
@@ -47,13 +52,18 @@
                                         </#if>
                                     </tr>
 
+
                                     </#list>
 
                                     <#list contactPage as contactPage>
                                         <tr>
                                             <td>Контакты</td>
                                             <td>${contactPage.dateCreation!" "}</td>
-                                            <td>Статус</td>
+                                            <td><!-- Rounded switch -->
+                                                <label class="switch">
+                                                    <input type="checkbox">
+                                                    <span class="slider round"></span>
+                                                </label></td>
                                             <td><a href="/contactPage/${contactPage.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
 
                                         </tr>
@@ -62,15 +72,6 @@
                                     </tr>
 
                                     </tbody>
-                                    <#--                                <tfoot>-->
-                                    <#--                                <tr>-->
-                                    <#--                                    <th>Rendering engine</th>-->
-                                    <#--                                    <th>Browser</th>-->
-                                    <#--                                    <th>Platform(s)</th>-->
-                                    <#--                                    <th>Engine version</th>-->
-                                    <#--                                    <th>CSS grade</th>-->
-                                    <#--                                </tr>-->
-                                    <#--                                </tfoot>-->
                                 </table>
                             </div>
                             <!-- /.card-body -->

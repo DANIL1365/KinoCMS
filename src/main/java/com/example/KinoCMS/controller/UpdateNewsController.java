@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -74,106 +76,117 @@ public class UpdateNewsController {
     @PostMapping
     public String updateNewNews(
             @RequestParam("newsId") Long id,
-            @RequestParam String nameNews,
-            @RequestParam("publicationDate")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publicationDate,
-            @RequestParam String description,
-            @RequestParam("mainNewsPicture") MultipartFile mainNewsPicture,
-            @RequestParam("pictureNewsGalleryOne") MultipartFile pictureNewsGalleryOne,
-            @RequestParam("pictureNewsGalleryTwo") MultipartFile pictureNewsGalleryTwo,
-            @RequestParam("pictureNewsGalleryThree") MultipartFile pictureNewsGalleryThree,
-            @RequestParam("pictureNewsGalleryFour") MultipartFile pictureNewsGalleryFour,
-            @RequestParam("pictureNewsGalleryFive") MultipartFile pictureNewsGalleryFive,
-            @RequestParam String videoLink,
-            Map<String, Object> model) throws IOException {
-        News newsAdd = new News(id, nameNews,publicationDate, description, videoLink);
+            @Valid News news,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("mainPicture") MultipartFile mainPicture,
+            @RequestParam("galleryOne") MultipartFile galleryOne,
+            @RequestParam("galleryTwo") MultipartFile galleryTwo,
+            @RequestParam("galleryThree") MultipartFile galleryThree,
+            @RequestParam("galleryFour") MultipartFile galleryFour,
+            @RequestParam("galleryFive") MultipartFile galleryFive
+    ) throws IOException {
+        news.setId(id);
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
 
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("news", news);
 
-        if (mainNewsPicture != null  && !mainNewsPicture.getOriginalFilename().isEmpty()) {
-            File uploadDirmainNewsPicture = new File(uploadPath);
-            if (!uploadDirmainNewsPicture.exists()) {
-                uploadDirmainNewsPicture.mkdir();
+            return "updateNews";
+        } else {
+//        News newsAdd = new News(nameNews,publicationDate, description, videoLink);
+
+
+            if (mainPicture != null && !mainPicture.getOriginalFilename().isEmpty()) {
+                File uploadDirmainNewsPicture = new File(uploadPath);
+                if (!uploadDirmainNewsPicture.exists()) {
+                    uploadDirmainNewsPicture.mkdir();
+                }
+
+                String uuidFilemainNewsPicture = UUID.randomUUID().toString();
+                String resultFilenamemainNewsPicture = uuidFilemainNewsPicture + "." + mainPicture.getOriginalFilename();
+
+                mainPicture.transferTo(new File(uploadPath + "/" + resultFilenamemainNewsPicture));
+
+                news.setMainNewsPicture(resultFilenamemainNewsPicture);
             }
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
+                File uploadDirNewsGalleryOne = new File(uploadPath);
+                if (!uploadDirNewsGalleryOne.exists()) {
+                    uploadDirNewsGalleryOne.mkdir();
+                }
 
-            String uuidFilemainNewsPicture = UUID.randomUUID().toString();
-            String resultFilenamemainNewsPicture = uuidFilemainNewsPicture + "." + mainNewsPicture.getOriginalFilename();
+                String uuidFileNewsGalleryOne = UUID.randomUUID().toString();
+                String resultFilenameNewsGalleryOne = uuidFileNewsGalleryOne + "." + galleryOne.getOriginalFilename();
 
-            mainNewsPicture.transferTo(new File(uploadPath + "/" + resultFilenamemainNewsPicture));
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryOne));
 
-            newsAdd.setMainNewsPicture(resultFilenamemainNewsPicture);
-        }
-        if (pictureNewsGalleryOne != null   && !pictureNewsGalleryOne.getOriginalFilename().isEmpty()) {
-            File uploadDirNewsGalleryOne = new File(uploadPath);
-            if (!uploadDirNewsGalleryOne.exists()) {
-                uploadDirNewsGalleryOne.mkdir();
+                news.setPictureNewsGalleryOne(resultFilenameNewsGalleryOne);
             }
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
+                File uploadDirNewsGalleryTwo = new File(uploadPath);
+                if (!uploadDirNewsGalleryTwo.exists()) {
+                    uploadDirNewsGalleryTwo.mkdir();
+                }
 
-            String uuidFileNewsGalleryOne = UUID.randomUUID().toString();
-            String resultFilenameNewsGalleryOne = uuidFileNewsGalleryOne + "." + pictureNewsGalleryOne.getOriginalFilename();
+                String uuidFileNewsGalleryTwo = UUID.randomUUID().toString();
+                String resultFilenameNewsGalleryTwo = uuidFileNewsGalleryTwo + "." + galleryTwo.getOriginalFilename();
 
-            pictureNewsGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryOne));
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryTwo));
 
-            newsAdd.setPictureNewsGalleryOne(resultFilenameNewsGalleryOne);
-        }
-        if (pictureNewsGalleryTwo != null   && !pictureNewsGalleryTwo.getOriginalFilename().isEmpty()) {
-            File uploadDirNewsGalleryTwo = new File(uploadPath);
-            if (!uploadDirNewsGalleryTwo.exists()) {
-                uploadDirNewsGalleryTwo.mkdir();
+                news.setPictureNewsGalleryTwo(resultFilenameNewsGalleryTwo);
             }
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
+                File uploadDirNewsGalleryThree = new File(uploadPath);
+                if (!uploadDirNewsGalleryThree.exists()) {
+                    uploadDirNewsGalleryThree.mkdir();
+                }
 
-            String uuidFileNewsGalleryTwo = UUID.randomUUID().toString();
-            String resultFilenameNewsGalleryTwo = uuidFileNewsGalleryTwo + "." + pictureNewsGalleryTwo.getOriginalFilename();
+                String uuidFileNewsGalleryThree = UUID.randomUUID().toString();
+                String resultFilenameNewsGalleryThree = uuidFileNewsGalleryThree + "." + galleryThree.getOriginalFilename();
 
-            pictureNewsGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryTwo));
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryThree));
 
-            newsAdd.setPictureNewsGalleryTwo(resultFilenameNewsGalleryTwo);
-        }
-        if (pictureNewsGalleryThree != null   && !pictureNewsGalleryThree.getOriginalFilename().isEmpty()) {
-            File uploadDirNewsGalleryThree = new File(uploadPath);
-            if (!uploadDirNewsGalleryThree.exists()) {
-                uploadDirNewsGalleryThree.mkdir();
+                news.setPictureNewsGalleryThree(resultFilenameNewsGalleryThree);
             }
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
+                File uploadDirNewsGalleryFour = new File(uploadPath);
+                if (!uploadDirNewsGalleryFour.exists()) {
+                    uploadDirNewsGalleryFour.mkdir();
+                }
 
-            String uuidFileNewsGalleryThree = UUID.randomUUID().toString();
-            String resultFilenameNewsGalleryThree = uuidFileNewsGalleryThree + "." + pictureNewsGalleryThree.getOriginalFilename();
+                String uuidFileNewsGalleryFour = UUID.randomUUID().toString();
+                String resultFilenameNewsGalleryFour = uuidFileNewsGalleryFour + "." + galleryFour.getOriginalFilename();
 
-            pictureNewsGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryThree));
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryFour));
 
-            newsAdd.setPictureNewsGalleryThree(resultFilenameNewsGalleryThree);
-        }
-        if (pictureNewsGalleryFour != null   && !pictureNewsGalleryFour.getOriginalFilename().isEmpty()) {
-            File uploadDirNewsGalleryFour = new File(uploadPath);
-            if (!uploadDirNewsGalleryFour.exists()) {
-                uploadDirNewsGalleryFour.mkdir();
+                news.setPictureNewsGalleryFour(resultFilenameNewsGalleryFour);
             }
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
+                File uploadDirNewsGalleryFive = new File(uploadPath);
+                if (!uploadDirNewsGalleryFive.exists()) {
+                    uploadDirNewsGalleryFive.mkdir();
+                }
 
-            String uuidFileNewsGalleryFour = UUID.randomUUID().toString();
-            String resultFilenameNewsGalleryFour = uuidFileNewsGalleryFour + "." + pictureNewsGalleryFour.getOriginalFilename();
+                String uuidFileNewsGalleryFive = UUID.randomUUID().toString();
+                String resultFilenameNewsGalleryFive = uuidFileNewsGalleryFive + "." + galleryFive.getOriginalFilename();
 
-            pictureNewsGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryFour));
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryFive));
 
-            newsAdd.setPictureNewsGalleryFour(resultFilenameNewsGalleryFour);
-        }
-        if (pictureNewsGalleryFive != null   && !pictureNewsGalleryFive.getOriginalFilename().isEmpty()) {
-            File uploadDirNewsGalleryFive = new File(uploadPath);
-            if (!uploadDirNewsGalleryFive.exists()) {
-                uploadDirNewsGalleryFive.mkdir();
+                news.setPictureNewsGalleryFive(resultFilenameNewsGalleryFive);
             }
+            model.addAttribute("news", null);
+            newsService.createNews(news);
 
-            String uuidFileNewsGalleryFive = UUID.randomUUID().toString();
-            String resultFilenameNewsGalleryFive = uuidFileNewsGalleryFive + "." + pictureNewsGalleryFive.getOriginalFilename();
-
-            pictureNewsGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameNewsGalleryFive));
-
-            newsAdd.setPictureNewsGalleryFive(resultFilenameNewsGalleryFive);
         }
-
-        newsService.createNews(newsAdd);
 
         Iterable<News> news1 = newsService.getAllNews();
 
-        model.put("news1", news1);
+        model.addAttribute("news1", news1);
         // model.put("filter","");
 
         return "redirect:/news";

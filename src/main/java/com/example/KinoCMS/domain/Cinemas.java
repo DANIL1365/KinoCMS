@@ -1,10 +1,10 @@
 package com.example.KinoCMS.domain;
 
 
-//import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-//import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name ="cinemas")
@@ -13,15 +13,15 @@ public class Cinemas {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
 
-//    @NotBlank(message = " Name cinema cannot be empty")
+    @NotBlank(message = " Name cinema cannot be empty")
     @Column(name = "name_cinema")
     private String nameCinema;
-//    @NotBlank(message = " Description cannot be empty")
-//    @Length(max = 400, message = "Text too long")
+    @NotBlank(message = " Description cannot be empty")
+    @Length(max = 400, message = "Text too long")
     @Column(name = "description")
     private String descriptionCinema;
-//    @NotBlank(message = " Conditions cannot be empty")
-//    @Length(max = 400, message = "Text too long")
+    @NotBlank(message = " Conditions cannot be empty")
+    @Length(max = 400, message = "Text too long")
     @Column(name = "conditions")
     private String conditionsCinema;
     @Column(name = "logo")

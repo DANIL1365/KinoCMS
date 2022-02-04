@@ -19,58 +19,86 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Название : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="nameCinema" class="form-control" placeholder="name Cinema" />
+                                            <input type="text" name="nameCinema"
+                                                   class="form-control ${(nameCinemaError??)?string('is-invalid', '')}"
+                                                   value="<#if currentFilms??>${currentFilms.nameCinema}</#if>"
+                                                   placeholder="Введите название ..." />
+                                            <#if nameCinemaError??>
+                                                <div class="invalid-feedback">
+                                                    ${nameCinemaError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Описание : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="description" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="description" class="form-control ${(descriptionError??)?string('is-invalid', '')}" placeholder="Введите ..."><#if currentFilms??>${currentFilms.description}</#if></textarea>
+                                            <#if descriptionError??>
+                                                <div class="invalid-feedback">
+                                                    ${descriptionError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Ссылка : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="trailerLink" class="form-control" placeholder="ссылка " />
+                                            <input type="text" name="trailerLink"
+                                                   class="form-control ${(trailerLinkError??)?string('is-invalid', '')}"
+                                                   value="<#if currentFilms??>${currentFilms.trailerLink}</#if>"
+                                                   placeholder="Введите название ..." />
+                                            <#if trailerLinkError??>
+                                                <div class="invalid-feedback">
+                                                    ${trailerLinkError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Тип фильма : </label>
                                         <div class="col-sm-6">
-                                            <select class="form-control select2" name="typeCinema" style="width: 100%;" />
+                                            <select class="form-control select2 ${(typeCinemaError??)?string('is-invalid', '')}"
+                                                    name="typeCinema" style="width: 100%;"
+                                                    value="<#if currentFilms??>${currentFilms.typeCinema}</#if>" />
                                             <option selected="selected"></option>
                                             <option>2D</option>
                                             <option>3D</option>
                                             <option>IMAX</option>
                                             </select>
+                                            <#if typeCinemaError??>
+                                                <div class="invalid-feedback">
+                                                    ${typeCinemaError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Главная картинка : </label>
                                         <div class="custom-file">
-                                            <input type="file" class="form-control" id="mainPicture" name="mainPicture">
+                                            <input type="file" class="form-control" id="mainPicture" name="main">
                                         </div>
                                     </div>
                                     <h5>Галерея картинок</h5>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryOne">Первая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryOne" id="pictureGalleryOne">
+                                        <input type="file" class="form-control" name="galleryOne" id="pictureGalleryOne">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryTwo">Вторая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryTwo" id="pictureGalleryTwo">
+                                        <input type="file" class="form-control" name="galleryTwo" id="pictureGalleryTwo">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryThree">Третья картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryThree" id="pictureGalleryThree">
+                                        <input type="file" class="form-control" name="galleryThree" id="pictureGalleryThree">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryFour">Четвертая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryFour" id="pictureGalleryFour">
+                                        <input type="file" class="form-control" name="galleryFour" id="pictureGalleryFour">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryFive">Пятая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryFive" id="pictureGalleryFive">
+                                        <input type="file" class="form-control" name="galleryFive" id="pictureGalleryFive">
                                     </div>
                                     <input type="hidden" value="${currentFilms.id}" name="currentId">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}" />

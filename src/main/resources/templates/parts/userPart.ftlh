@@ -86,9 +86,7 @@
 
                                     </#if>
                                 </#list>
-                                <#list contactPages as contactPage>
-                                    <a class="dropdown-item" href="/contactPage/edit/${contactPage.id}">Контакты</a>
-                                    </#list>
+                                    <a class="dropdown-item" href="/getContactPage">Контакты</a>
                             </div>
                         </li>
                     </ul>
@@ -183,9 +181,8 @@
 
                                     </#if>
                                 </#list>
-                                <#list contactPages as contactPage>
-                                    <li><a href="/contactPage/edit/${contactPage.id}">Контакты</a></li>
-                                </#list>
+                                    <li><a href="/getContactPage">Контакты</a></li>
+
                             </ul>
                         </div>
                     </div>

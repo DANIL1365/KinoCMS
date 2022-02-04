@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -32,14 +34,8 @@ public class SharesController {
     @GetMapping("/shares")
     public String shares(@RequestParam(required = false, defaultValue = "")String filter, Model model){
         Iterable<Shares> shares = sharesService.getAllShares();
-//
-//        if (filter != null && !filter.isEmpty()) {
-//            shares = sharesService.findByNameCinema(filter);
-//        } else {
-//            cinemas = cinemasRepo.findAll();
-//        }
+
         model.addAttribute("shares", shares);
-//        model.addAttribute("filter", filter);
 
         return "shares";
     }
@@ -59,104 +55,116 @@ public class SharesController {
 
     @PostMapping("/sharesAdd")
     public String addNewShares(
-            @RequestParam String nameShares,
-            @RequestParam("publicationDate")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publicationDate,
-            @RequestParam String description,
-            @RequestParam("mainSharesPicture") MultipartFile mainSharesPicture,
-            @RequestParam("pictureSharesGalleryOne") MultipartFile pictureSharesGalleryOne,
-            @RequestParam("pictureSharesGalleryTwo") MultipartFile pictureSharesGalleryTwo,
-            @RequestParam("pictureSharesGalleryThree") MultipartFile pictureSharesGalleryThree,
-            @RequestParam("pictureSharesGalleryFour") MultipartFile pictureSharesGalleryFour,
-            @RequestParam("pictureSharesGalleryFive") MultipartFile pictureSharesGalleryFive,
-            @RequestParam String videoLink,
-            Map<String, Object> model) throws IOException {
-        Shares shares = new Shares(nameShares,publicationDate, description, videoLink);
+            @Valid Shares shares,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("mainPicture") MultipartFile mainPicture,
+            @RequestParam("galleryOne") MultipartFile galleryOne,
+            @RequestParam("galleryTwo") MultipartFile galleryTwo,
+            @RequestParam("galleryThree") MultipartFile galleryThree,
+            @RequestParam("galleryFour") MultipartFile galleryFour,
+            @RequestParam("galleryFive") MultipartFile galleryFive
 
-        if (mainSharesPicture != null  && !mainSharesPicture.getOriginalFilename().isEmpty()) {
-            File uploadDirmainSharesPicture = new File(uploadPath);
-            if (!uploadDirmainSharesPicture.exists()) {
-                uploadDirmainSharesPicture.mkdir();
+
+    ) throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+
+
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("shares", shares);
+
+            return "sharesAdd";
+        } else {
+
+            if (mainPicture != null && !mainPicture.getOriginalFilename().isEmpty()) {
+                File uploadDirmainSharesPicture = new File(uploadPath);
+                if (!uploadDirmainSharesPicture.exists()) {
+                    uploadDirmainSharesPicture.mkdir();
+                }
+
+                String uuidFilemainSharesPicture = UUID.randomUUID().toString();
+                String resultFilenamemainSharesPicture = uuidFilemainSharesPicture + "." + mainPicture.getOriginalFilename();
+
+                mainPicture.transferTo(new File(uploadPath + "/" + resultFilenamemainSharesPicture));
+
+                shares.setMainSharesPicture(resultFilenamemainSharesPicture);
             }
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
+                File uploadDirSharesGalleryOne = new File(uploadPath);
+                if (!uploadDirSharesGalleryOne.exists()) {
+                    uploadDirSharesGalleryOne.mkdir();
+                }
 
-            String uuidFilemainSharesPicture = UUID.randomUUID().toString();
-            String resultFilenamemainSharesPicture = uuidFilemainSharesPicture + "." + mainSharesPicture.getOriginalFilename();
+                String uuidFileSharesGalleryOne = UUID.randomUUID().toString();
+                String resultFilenameSharesGalleryOne = uuidFileSharesGalleryOne + "." + galleryOne.getOriginalFilename();
 
-            mainSharesPicture.transferTo(new File(uploadPath + "/" + resultFilenamemainSharesPicture));
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryOne));
 
-            shares.setMainSharesPicture(resultFilenamemainSharesPicture);
-        }
-        if (pictureSharesGalleryOne != null   && !pictureSharesGalleryOne.getOriginalFilename().isEmpty()) {
-            File uploadDirSharesGalleryOne = new File(uploadPath);
-            if (!uploadDirSharesGalleryOne.exists()) {
-                uploadDirSharesGalleryOne.mkdir();
+                shares.setPictureSharesGalleryOne(resultFilenameSharesGalleryOne);
             }
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
+                File uploadDirSharesGalleryTwo = new File(uploadPath);
+                if (!uploadDirSharesGalleryTwo.exists()) {
+                    uploadDirSharesGalleryTwo.mkdir();
+                }
 
-            String uuidFileSharesGalleryOne = UUID.randomUUID().toString();
-            String resultFilenameSharesGalleryOne = uuidFileSharesGalleryOne + "." + pictureSharesGalleryOne.getOriginalFilename();
+                String uuidFileSharesGalleryTwo = UUID.randomUUID().toString();
+                String resultFilenameSharesGalleryTwo = uuidFileSharesGalleryTwo + "." + galleryTwo.getOriginalFilename();
 
-            pictureSharesGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryOne));
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryTwo));
 
-            shares.setPictureSharesGalleryOne(resultFilenameSharesGalleryOne);
-        }
-        if (pictureSharesGalleryTwo != null   && !pictureSharesGalleryTwo.getOriginalFilename().isEmpty()) {
-            File uploadDirSharesGalleryTwo = new File(uploadPath);
-            if (!uploadDirSharesGalleryTwo.exists()) {
-                uploadDirSharesGalleryTwo.mkdir();
+                shares.setPictureSharesGalleryTwo(resultFilenameSharesGalleryTwo);
             }
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
+                File uploadDirSharesGalleryThree = new File(uploadPath);
+                if (!uploadDirSharesGalleryThree.exists()) {
+                    uploadDirSharesGalleryThree.mkdir();
+                }
 
-            String uuidFileSharesGalleryTwo = UUID.randomUUID().toString();
-            String resultFilenameSharesGalleryTwo = uuidFileSharesGalleryTwo + "." + pictureSharesGalleryTwo.getOriginalFilename();
+                String uuidFileSharesGalleryThree = UUID.randomUUID().toString();
+                String resultFilenameSharesGalleryThree = uuidFileSharesGalleryThree + "." + galleryThree.getOriginalFilename();
 
-            pictureSharesGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryTwo));
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryThree));
 
-            shares.setPictureSharesGalleryTwo(resultFilenameSharesGalleryTwo);
-        }
-        if (pictureSharesGalleryThree != null   && !pictureSharesGalleryThree.getOriginalFilename().isEmpty()) {
-            File uploadDirSharesGalleryThree = new File(uploadPath);
-            if (!uploadDirSharesGalleryThree.exists()) {
-                uploadDirSharesGalleryThree.mkdir();
+                shares.setPictureSharesGalleryThree(resultFilenameSharesGalleryThree);
             }
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
+                File uploadDirSharesGalleryFour = new File(uploadPath);
+                if (!uploadDirSharesGalleryFour.exists()) {
+                    uploadDirSharesGalleryFour.mkdir();
+                }
 
-            String uuidFileSharesGalleryThree = UUID.randomUUID().toString();
-            String resultFilenameSharesGalleryThree = uuidFileSharesGalleryThree + "." + pictureSharesGalleryThree.getOriginalFilename();
+                String uuidFileSharesGalleryFour = UUID.randomUUID().toString();
+                String resultFilenameSharesGalleryFour = uuidFileSharesGalleryFour + "." + galleryFour.getOriginalFilename();
 
-            pictureSharesGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryThree));
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryFour));
 
-            shares.setPictureSharesGalleryThree(resultFilenameSharesGalleryThree);
-        }
-        if (pictureSharesGalleryFour != null   && !pictureSharesGalleryFour.getOriginalFilename().isEmpty()) {
-            File uploadDirSharesGalleryFour = new File(uploadPath);
-            if (!uploadDirSharesGalleryFour.exists()) {
-                uploadDirSharesGalleryFour.mkdir();
+                shares.setPictureSharesGalleryFour(resultFilenameSharesGalleryFour);
             }
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
+                File uploadDirSharesGalleryFive = new File(uploadPath);
+                if (!uploadDirSharesGalleryFive.exists()) {
+                    uploadDirSharesGalleryFive.mkdir();
+                }
 
-            String uuidFileSharesGalleryFour = UUID.randomUUID().toString();
-            String resultFilenameSharesGalleryFour = uuidFileSharesGalleryFour + "." + pictureSharesGalleryFour.getOriginalFilename();
+                String uuidFileSharesGalleryFive = UUID.randomUUID().toString();
+                String resultFilenameSharesGalleryFive = uuidFileSharesGalleryFive + "." + galleryFive.getOriginalFilename();
 
-            pictureSharesGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryFour));
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryFive));
 
-            shares.setPictureSharesGalleryFour(resultFilenameSharesGalleryFour);
-        }
-        if (pictureSharesGalleryFive != null   && !pictureSharesGalleryFive.getOriginalFilename().isEmpty()) {
-            File uploadDirSharesGalleryFive = new File(uploadPath);
-            if (!uploadDirSharesGalleryFive.exists()) {
-                uploadDirSharesGalleryFive.mkdir();
+                shares.setPictureSharesGalleryFive(resultFilenameSharesGalleryFive);
             }
+            model.addAttribute("shares", null);
+            sharesService.createShares(shares);
 
-            String uuidFileSharesGalleryFive = UUID.randomUUID().toString();
-            String resultFilenameSharesGalleryFive = uuidFileSharesGalleryFive + "." + pictureSharesGalleryFive.getOriginalFilename();
-
-            pictureSharesGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameSharesGalleryFive));
-
-            shares.setPictureSharesGalleryFive(resultFilenameSharesGalleryFive);
         }
-
-        sharesService.createShares(shares);
 
         Iterable<Shares> shares1 = sharesService.getAllShares();
 
-        model.put("shares1", shares1);
+        model.addAttribute("shares1", shares1);
         // model.put("filter","");
 
         return "redirect:/shares";

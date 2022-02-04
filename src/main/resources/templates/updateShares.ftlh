@@ -19,53 +19,82 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Название : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="nameShares" class="form-control" placeholder="name shares" />
+                                            <input type="text" name="nameShares"
+                                                   class="form-control ${(nameSharesError??)?string('is-invalid', '')}"
+                                                   value="<#if shares??>${shares.nameShares}</#if>"
+                                                   placeholder="Введите название ..." />
+                                            <#if nameSharesError??>
+                                                <div class="invalid-feedback">
+                                                    ${nameSharesError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Дата публикации : </label>
                                         <div class="col-sm-6">
-                                            <input type="date" name="publicationDate" class="form-control" placeholder="Введите дату" />
+                                            <input type="date" name="publicationDate"
+                                                   class="form-control ${(publicationDateError??)?string('is-invalid', '')}"
+                                                    <#--                       value="<#if newsAdd??>${newsAdd.namePage}</#if>"-->
+                                                   placeholder="Введите название ..." />
+                                            <#if publicationDateError??>
+                                                <div class="invalid-feedback">
+                                                    ${publicationDateError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Описание : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="description" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="description" class="form-control ${(descriptionError??)?string('is-invalid', '')}" placeholder="Введите ..."><#if shares??>${shares.description}</#if></textarea>
+                                            <#if descriptionError??>
+                                                <div class="invalid-feedback">
+                                                    ${descriptionError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Ссылка : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="videoLink" class="form-control" placeholder="ссылка " />
+                                            <input type="text" name="videoLink"
+                                                   class="form-control ${(videoLinkError??)?string('is-invalid', '')}"
+                                                   value="<#if shares??>${shares.videoLink}</#if>"
+                                                   placeholder="Введите ссылку ..." />
+                                            <#if videoLinkError??>
+                                                <div class="invalid-feedback">
+                                                    ${videoLinkError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Главная картинка : </label>
                                         <div class="custom-file">
-                                            <input type="file" class="form-control" id="mainSharesPicture" name="mainSharesPicture">
+                                            <input type="file" class="form-control" id="mainSharesPicture" name="mainPicture">
                                         </div>
                                     </div>
                                     <h5>Галерея картинок</h5>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureSharesGalleryOne">Первая картинка</label>
-                                        <input type="file" class="form-control" name="pictureSharesGalleryOne" id="pictureSharesGalleryOne">
+                                        <input type="file" class="form-control" name="galleryOne" id="pictureSharesGalleryOne">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureSharesGalleryTwo">Вторая картинка</label>
-                                        <input type="file" class="form-control" name="pictureSharesGalleryTwo" id="pictureSharesGalleryTwo">
+                                        <input type="file" class="form-control" name="galleryTwo" id="pictureSharesGalleryTwo">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureSharesGalleryThree">Третья картинка</label>
-                                        <input type="file" class="form-control" name="pictureSharesGalleryThree" id="pictureSharesGalleryThree">
+                                        <input type="file" class="form-control" name="galleryThree" id="pictureSharesGalleryThree">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureSharesGalleryFour">Четвертая картинка</label>
-                                        <input type="file" class="form-control" name="pictureSharesGalleryFour" id="pictureSharesGalleryFour">
+                                        <input type="file" class="form-control" name="galleryFour" id="pictureSharesGalleryFour">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureSharesGalleryFive">Пятая картинка</label>
-                                        <input type="file" class="form-control" name="pictureSharesGalleryFive" id="pictureSharesGalleryFive">
+                                        <input type="file" class="form-control" name="galleryFive" id="pictureSharesGalleryFive">
                                     </div>
                                     <input type="hidden" value="${shares.id}" name="sharesId">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}" />

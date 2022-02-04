@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -92,118 +94,131 @@ public class UpdateHallController {
     @PostMapping
     public String addNewHall(
             @RequestParam("hallId") Long id,
-            @RequestParam String hallNumber,
-            @RequestParam String hallDescription,
-            @RequestParam("hallLayout") MultipartFile hallLayout,
-            @RequestParam("topBanner") MultipartFile topBanner,
-            @RequestParam("pictureHallGalleryOne") MultipartFile pictureHallGalleryOne,
-            @RequestParam("pictureHallGalleryTwo") MultipartFile pictureHallGalleryTwo,
-            @RequestParam("pictureHallGalleryThree") MultipartFile pictureHallGalleryThree,
-            @RequestParam("pictureHallGalleryFour") MultipartFile pictureHallGalleryFour,
-            @RequestParam("pictureHallGalleryFive") MultipartFile pictureHallGalleryFive,
-            @RequestParam("dateCreation")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateCreation,
-            Map<String, Object> hallModel) throws IOException {
-        Hall hall = new Hall(id, hallNumber, hallDescription, dateCreation);
+            @Valid Hall hall,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("layout") MultipartFile layout,
+            @RequestParam("top") MultipartFile top,
+            @RequestParam("galleryOne") MultipartFile galleryOne,
+            @RequestParam("galleryTwo") MultipartFile galleryTwo,
+            @RequestParam("galleryThree") MultipartFile galleryThree,
+            @RequestParam("galleryFour") MultipartFile galleryFour,
+            @RequestParam("galleryFive") MultipartFile galleryFive
+
+    ) throws IOException {
+        hall.setId(id);
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
 
-        if (hallLayout != null  && !hallLayout.getOriginalFilename().isEmpty()) {
-            File uploadDirHallLayout = new File(uploadPath);
-            if (!uploadDirHallLayout.exists()) {
-                uploadDirHallLayout.mkdir();
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("hall", hall);
+
+            return "updateHall";
+        } else {
+
+
+            if (layout != null && !layout.getOriginalFilename().isEmpty()) {
+                File uploadDirHallLayout = new File(uploadPath);
+                if (!uploadDirHallLayout.exists()) {
+                    uploadDirHallLayout.mkdir();
+                }
+
+                String uuidFileHallLayout = UUID.randomUUID().toString();
+                String resultFilenameHallLayout = uuidFileHallLayout + "." + layout.getOriginalFilename();
+
+                layout.transferTo(new File(uploadPath + "/" + resultFilenameHallLayout));
+
+                hall.setHallLayout(resultFilenameHallLayout);
             }
+            if (top != null && !top.getOriginalFilename().isEmpty()) {
+                File uploadDirtopBanner = new File(uploadPath);
+                if (!uploadDirtopBanner.exists()) {
+                    uploadDirtopBanner.mkdir();
+                }
 
-            String uuidFileHallLayout = UUID.randomUUID().toString();
-            String resultFilenameHallLayout = uuidFileHallLayout + "." + hallLayout.getOriginalFilename();
+                String uuidFiletopBanner = UUID.randomUUID().toString();
+                String resultFilenametopBanner = uuidFiletopBanner + "." + top.getOriginalFilename();
 
-            hallLayout.transferTo(new File(uploadPath + "/" + resultFilenameHallLayout));
+                top.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
 
-            hall.setHallLayout(resultFilenameHallLayout);
-        }
-        if (topBanner != null  && !topBanner.getOriginalFilename().isEmpty()) {
-            File uploadDirtopBanner = new File(uploadPath);
-            if (!uploadDirtopBanner.exists()) {
-                uploadDirtopBanner.mkdir();
+                hall.setTopBanner(resultFilenametopBanner);
             }
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryOne = new File(uploadPath);
+                if (!uploadDirGalleryOne.exists()) {
+                    uploadDirGalleryOne.mkdir();
+                }
 
-            String uuidFiletopBanner = UUID.randomUUID().toString();
-            String resultFilenametopBanner = uuidFiletopBanner + "." + topBanner.getOriginalFilename();
+                String uuidFileGalleryOne = UUID.randomUUID().toString();
+                String resultFilenameGalleryOne = uuidFileGalleryOne + "." + galleryOne.getOriginalFilename();
 
-            topBanner.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
 
-            hall.setTopBanner(resultFilenametopBanner);
-        }
-        if (pictureHallGalleryOne != null   && !pictureHallGalleryOne.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryOne = new File(uploadPath);
-            if (!uploadDirGalleryOne.exists()) {
-                uploadDirGalleryOne.mkdir();
+                hall.setPictureHallGalleryOne(resultFilenameGalleryOne);
             }
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryTwo = new File(uploadPath);
+                if (!uploadDirGalleryTwo.exists()) {
+                    uploadDirGalleryTwo.mkdir();
+                }
 
-            String uuidFileGalleryOne = UUID.randomUUID().toString();
-            String resultFilenameGalleryOne = uuidFileGalleryOne + "." + pictureHallGalleryOne.getOriginalFilename();
+                String uuidFileGalleryTwo = UUID.randomUUID().toString();
+                String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + galleryTwo.getOriginalFilename();
 
-            pictureHallGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
 
-            hall.setPictureHallGalleryOne(resultFilenameGalleryOne);
-        }
-        if (pictureHallGalleryTwo != null   && !pictureHallGalleryTwo.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryTwo = new File(uploadPath);
-            if (!uploadDirGalleryTwo.exists()) {
-                uploadDirGalleryTwo.mkdir();
+                hall.setPictureHallGalleryTwo(resultFilenameGalleryTwo);
             }
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryThree = new File(uploadPath);
+                if (!uploadDirGalleryThree.exists()) {
+                    uploadDirGalleryThree.mkdir();
+                }
 
-            String uuidFileGalleryTwo = UUID.randomUUID().toString();
-            String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + pictureHallGalleryTwo.getOriginalFilename();
+                String uuidFileGalleryThree = UUID.randomUUID().toString();
+                String resultFilenameGalleryThree = uuidFileGalleryThree + "." + galleryThree.getOriginalFilename();
 
-            pictureHallGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
 
-            hall.setPictureHallGalleryTwo(resultFilenameGalleryTwo);
-        }
-        if (pictureHallGalleryThree != null   && !pictureHallGalleryThree.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryThree = new File(uploadPath);
-            if (!uploadDirGalleryThree.exists()) {
-                uploadDirGalleryThree.mkdir();
+                hall.setPictureHallGalleryThree(resultFilenameGalleryThree);
             }
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryFour = new File(uploadPath);
+                if (!uploadDirGalleryFour.exists()) {
+                    uploadDirGalleryFour.mkdir();
+                }
 
-            String uuidFileGalleryThree = UUID.randomUUID().toString();
-            String resultFilenameGalleryThree = uuidFileGalleryThree + "." + pictureHallGalleryThree.getOriginalFilename();
+                String uuidFileGalleryFour = UUID.randomUUID().toString();
+                String resultFilenameGalleryFour = uuidFileGalleryFour + "." + galleryFour.getOriginalFilename();
 
-            pictureHallGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
 
-            hall.setPictureHallGalleryThree(resultFilenameGalleryThree);
-        }
-        if (pictureHallGalleryFour != null   && !pictureHallGalleryFour.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFour = new File(uploadPath);
-            if (!uploadDirGalleryFour.exists()) {
-                uploadDirGalleryFour.mkdir();
+                hall.setPictureHallGalleryFour(resultFilenameGalleryFour);
             }
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryFive = new File(uploadPath);
+                if (!uploadDirGalleryFive.exists()) {
+                    uploadDirGalleryFive.mkdir();
+                }
 
-            String uuidFileGalleryFour = UUID.randomUUID().toString();
-            String resultFilenameGalleryFour = uuidFileGalleryFour + "." + pictureHallGalleryFour.getOriginalFilename();
+                String uuidFileGalleryFive = UUID.randomUUID().toString();
+                String resultFilenameGalleryFive = uuidFileGalleryFive + "." + galleryFive.getOriginalFilename();
 
-            pictureHallGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
 
-            hall.setPictureHallGalleryFour(resultFilenameGalleryFour);
-        }
-        if (pictureHallGalleryFive != null   && !pictureHallGalleryFive.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFive = new File(uploadPath);
-            if (!uploadDirGalleryFive.exists()) {
-                uploadDirGalleryFive.mkdir();
+                hall.setPictureHallGalleryFive(resultFilenameGalleryFive);
             }
+            model.addAttribute("hall", null);
+            hallService.createHall(hall);
 
-            String uuidFileGalleryFive = UUID.randomUUID().toString();
-            String resultFilenameGalleryFive = uuidFileGalleryFive + "." + pictureHallGalleryFive.getOriginalFilename();
-
-            pictureHallGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
-
-            hall.setPictureHallGalleryFive(resultFilenameGalleryFive);
         }
-
-        hallService.createHall(hall);
 
         Iterable<Hall> halls = hallService.getAllHall();
 
-        hallModel.put("halls", halls);
+        model.addAttribute("halls", halls);
         // model.put("filter","");
 
         return "redirect:/hallList";

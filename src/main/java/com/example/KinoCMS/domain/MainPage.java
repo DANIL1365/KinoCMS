@@ -26,16 +26,10 @@ public class MainPage {
     @NotNull(message = "Date may not be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateMainCreation;
+    @Column(name = "on_of")
+    private Boolean onOf;
 
     public MainPage() {
-    }
-
-    public MainPage(Long id, String numberOne, String numberTwo, String seoText, LocalDate dateMainCreation) {
-        this.id = id;
-        this.numberOne = numberOne;
-        this.numberTwo = numberTwo;
-        this.seoText = seoText;
-        this.dateMainCreation = dateMainCreation;
     }
 
     public MainPage(String numberOne, String numberTwo, String seoText, LocalDate dateMainCreation) {
@@ -43,6 +37,15 @@ public class MainPage {
         this.numberTwo = numberTwo;
         this.seoText = seoText;
         this.dateMainCreation = dateMainCreation;
+    }
+
+    public MainPage(Long id, String numberOne, String numberTwo, String seoText, LocalDate dateMainCreation, Boolean onOf) {
+        this.id = id;
+        this.numberOne = numberOne;
+        this.numberTwo = numberTwo;
+        this.seoText = seoText;
+        this.dateMainCreation = dateMainCreation;
+        this.onOf = onOf;
     }
 
     public Long getId() {
@@ -83,5 +86,25 @@ public class MainPage {
 
     public void setDateMainCreation(LocalDate dateMainCreation) {
         this.dateMainCreation = dateMainCreation;
+    }
+
+    public Boolean getOnOf() {
+        return onOf;
+    }
+
+    public void setOnOf(Boolean onOf) {
+        this.onOf = onOf;
+    }
+
+    @Override
+    public String toString() {
+        return "MainPage{" +
+                "id=" + id +
+                ", numberOne='" + numberOne + '\'' +
+                ", numberTwo='" + numberTwo + '\'' +
+                ", seoText='" + seoText + '\'' +
+                ", dateMainCreation=" + dateMainCreation +
+                ", onOf=" + onOf +
+                '}';
     }
 }

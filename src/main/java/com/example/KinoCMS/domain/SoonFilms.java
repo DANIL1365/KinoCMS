@@ -1,6 +1,9 @@
 package com.example.KinoCMS.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -9,8 +12,11 @@ public class SoonFilms implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = " Name cinema cannot be empty")
     @Column(name = "name_cinema")
     private String nameSoonCinema;
+    @NotBlank(message = " Description cannot be empty")
+    @Length(max = 800, message = "Text too long")
     private String description;
     @Column(name = "main_soon_picture")
     private String mainSoonPicture;
@@ -25,21 +31,23 @@ public class SoonFilms implements Serializable {
     @Column(name = "picture_gallery_five")
     private String pictureGalleryFive;
     @Column(name = "trailer_link")
+    @NotBlank(message = "Video cannot be empty")
     private String trailerLink;
     @Column(name = "type_cinema")
+    @NotBlank(message = "Type cannot be empty")
     private String typeCinema;
 
     public SoonFilms() {
     }
 
-    public SoonFilms(String nameSoonCinema, String description, String trailerLink, String typeCinema, User user) {
+    public SoonFilms(String nameSoonCinema, String description, String trailerLink, String typeCinema) {
         this.nameSoonCinema = nameSoonCinema;
         this.description = description;
         this.trailerLink = trailerLink;
         this.typeCinema = typeCinema;
     }
 
-    public SoonFilms(Long id, String nameSoonCinema, String description, String trailerLink, String typeCinema, User user) {
+    public SoonFilms(Long id, String nameSoonCinema, String description, String trailerLink, String typeCinema) {
         this.id = id;
         this.nameSoonCinema = nameSoonCinema;
         this.description = description;

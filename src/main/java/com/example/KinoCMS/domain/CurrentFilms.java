@@ -1,6 +1,9 @@
 package com.example.KinoCMS.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 @Entity
@@ -10,8 +13,11 @@ public class CurrentFilms implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = " Name cinema cannot be empty")
     @Column(name = "name_cinema")
     private String nameCinema;
+    @NotBlank(message = " Description cannot be empty")
+    @Length(max = 800, message = "Text too long")
     private String description;
     @Column(name = "main_picture")
     private String mainPicture;
@@ -26,26 +32,24 @@ public class CurrentFilms implements Serializable {
     @Column(name = "picture_gallery_five")
     private String pictureGalleryFive;
     @Column(name = "trailer_link")
+    @NotBlank(message = "Video cannot be empty")
     private String trailerLink;
     @Column(name = "type_cinema")
+    @NotBlank(message = "Type cannot be empty")
     private String typeCinema;
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "user_id")
-//    private User author;
 
 
     public CurrentFilms() {
     }
 
-    public CurrentFilms(String nameCinema, String description, String trailerLink, String typeCinema, User user) {
+    public CurrentFilms(String nameCinema, String description, String trailerLink, String typeCinema) {
         this.nameCinema = nameCinema;
         this.description = description;
         this.trailerLink = trailerLink;
         this.typeCinema = typeCinema;
-//        this.author = user;
     }
 
-    public CurrentFilms(Long id, String nameCinema, String description, String trailerLink, String typeCinema, User user) {
+    public CurrentFilms(Long id, String nameCinema, String description, String trailerLink, String typeCinema) {
         this.id = id;
         this.nameCinema = nameCinema;
         this.description = description;
@@ -53,14 +57,10 @@ public class CurrentFilms implements Serializable {
         this.typeCinema = typeCinema;
     }
 
-    //    public String getAuthorName() {
-//        return author != null ? author.getUsername() : "<none>";
-//    }
 
     public Long getId() {
         return id;
     }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -146,13 +146,6 @@ public class CurrentFilms implements Serializable {
         this.typeCinema = typeCinema;
     }
 
-//    public User getAuthor() {
-//        return author;
-//    }
-//
-//    public void setAuthor(User author) {
-//        this.author = author;
-//    }
 
     @Override
     public String toString() {

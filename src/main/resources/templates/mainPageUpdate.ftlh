@@ -17,9 +17,19 @@
                             <form id="quickForm">
                                 <div class="card-body">
                                     <div class="form-group row">
+                                        <!-- Rounded switch -->
+                                        <label class="col-sm-2 col-form-label"> Вкл/Выкл : </label>
+                                        <label class="switch" for="onOf">
+                                            <input type="checkbox" id="onOf" name="onOf"
+                                                    <#if (mainPage.onOf = true)> checked
+                                                    <#else>
+                                                    </#if> class="form-control">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Номер телефона 1 : </label>
                                         <div class="col-sm-6">
-<#--                                            <input type="text" name="numberOne" class="form-control" placeholder="number" />-->
                                             <input type="text" name="numberOne"
                                                    class="form-control ${(numberOneError??)?string('is-invalid', '')}"
                                                    value="<#if mainPage??>${mainPage.numberOne}</#if>"

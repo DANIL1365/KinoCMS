@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -89,118 +91,130 @@ public class UpdateCinemasController {
     @PostMapping
     public String updateCinemas(
             @RequestParam("cinemasId") Long id,
-            @RequestParam String nameCinema,
-            @RequestParam String descriptionCinema,
-            @RequestParam String conditionsCinema,
-            @RequestParam("logo") MultipartFile logo,
-            @RequestParam("topBanner") MultipartFile topBanner,
-            @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
-            @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
-            @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
-            @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
-            @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
-            Map<String, Object> model) throws IOException {
-        Cinemas cinema = new Cinemas(id, nameCinema, descriptionCinema, conditionsCinema);
+            @Valid Cinemas cinemas,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("logoPicture") MultipartFile logoPicture,
+            @RequestParam("top") MultipartFile top,
+            @RequestParam("galleryOne") MultipartFile galleryOne,
+            @RequestParam("galleryTwo") MultipartFile galleryTwo,
+            @RequestParam("galleryThree") MultipartFile galleryThree,
+            @RequestParam("galleryFour") MultipartFile galleryFour,
+            @RequestParam("galleryFive") MultipartFile galleryFive
+    ) throws IOException {
+        cinemas.setId(id);
 
-        if (logo != null  && !logo.getOriginalFilename().isEmpty()) {
-            File uploadDirlogo = new File(uploadPath);
-            if (!uploadDirlogo.exists()) {
-                uploadDirlogo.mkdir();
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+
+
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("cinemas", cinemas);
+
+            return "cinemasUpdate";
+        } else {
+
+            if (logoPicture != null && !logoPicture.getOriginalFilename().isEmpty()) {
+                File uploadDirlogo = new File(uploadPath);
+                if (!uploadDirlogo.exists()) {
+                    uploadDirlogo.mkdir();
+                }
+
+                String uuidFilelogo = UUID.randomUUID().toString();
+                String resultFilenamelogo = uuidFilelogo + "." + logoPicture.getOriginalFilename();
+
+                logoPicture.transferTo(new File(uploadPath + "/" + resultFilenamelogo));
+
+                cinemas.setLogo(resultFilenamelogo);
+            }
+            if (top != null && !top.getOriginalFilename().isEmpty()) {
+                File uploadDirtopBanner = new File(uploadPath);
+                if (!uploadDirtopBanner.exists()) {
+                    uploadDirtopBanner.mkdir();
+                }
+
+                String uuidFiletopBanner = UUID.randomUUID().toString();
+                String resultFilenametopBanner = uuidFiletopBanner + "." + top.getOriginalFilename();
+
+                top.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
+
+                cinemas.setTopBanner(resultFilenametopBanner);
+            }
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryOne = new File(uploadPath);
+                if (!uploadDirGalleryOne.exists()) {
+                    uploadDirGalleryOne.mkdir();
+                }
+
+                String uuidFileGalleryOne = UUID.randomUUID().toString();
+                String resultFilenameGalleryOne = uuidFileGalleryOne + "." + galleryOne.getOriginalFilename();
+
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
+
+                cinemas.setPictureGalleryOne(resultFilenameGalleryOne);
+            }
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryTwo = new File(uploadPath);
+                if (!uploadDirGalleryTwo.exists()) {
+                    uploadDirGalleryTwo.mkdir();
+                }
+
+                String uuidFileGalleryTwo = UUID.randomUUID().toString();
+                String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + galleryTwo.getOriginalFilename();
+
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
+
+                cinemas.setPictureGalleryTwo(resultFilenameGalleryTwo);
+            }
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryThree = new File(uploadPath);
+                if (!uploadDirGalleryThree.exists()) {
+                    uploadDirGalleryThree.mkdir();
+                }
+
+                String uuidFileGalleryThree = UUID.randomUUID().toString();
+                String resultFilenameGalleryThree = uuidFileGalleryThree + "." + galleryThree.getOriginalFilename();
+
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
+
+                cinemas.setPictureGalleryThree(resultFilenameGalleryThree);
+            }
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryFour = new File(uploadPath);
+                if (!uploadDirGalleryFour.exists()) {
+                    uploadDirGalleryFour.mkdir();
+                }
+
+                String uuidFileGalleryFour = UUID.randomUUID().toString();
+                String resultFilenameGalleryFour = uuidFileGalleryFour + "." + galleryFour.getOriginalFilename();
+
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
+
+                cinemas.setPictureGalleryFour(resultFilenameGalleryFour);
+            }
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
+                File uploadDirGalleryFive = new File(uploadPath);
+                if (!uploadDirGalleryFive.exists()) {
+                    uploadDirGalleryFive.mkdir();
+                }
+
+                String uuidFileGalleryFive = UUID.randomUUID().toString();
+                String resultFilenameGalleryFive = uuidFileGalleryFive + "." + galleryFive.getOriginalFilename();
+
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
+
+                cinemas.setPictureGalleryFive(resultFilenameGalleryFive);
             }
 
-            String uuidFilelogo = UUID.randomUUID().toString();
-            String resultFilenamelogo = uuidFilelogo + "." + logo.getOriginalFilename();
+            model.addAttribute("cinemas", null);
+            cinemasService.createCinemas(cinemas);
 
-            logo.transferTo(new File(uploadPath + "/" + resultFilenamelogo));
-
-            cinema.setLogo(resultFilenamelogo);
         }
-        if (topBanner != null  && !topBanner.getOriginalFilename().isEmpty()) {
-            File uploadDirtopBanner = new File(uploadPath);
-            if (!uploadDirtopBanner.exists()) {
-                uploadDirtopBanner.mkdir();
-            }
-
-            String uuidFiletopBanner = UUID.randomUUID().toString();
-            String resultFilenametopBanner = uuidFiletopBanner + "." + logo.getOriginalFilename();
-
-            logo.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
-
-            cinema.setTopBanner(resultFilenametopBanner);
-        }
-        if (pictureGalleryOne != null   && !pictureGalleryOne.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryOne = new File(uploadPath);
-            if (!uploadDirGalleryOne.exists()) {
-                uploadDirGalleryOne.mkdir();
-            }
-
-            String uuidFileGalleryOne = UUID.randomUUID().toString();
-            String resultFilenameGalleryOne = uuidFileGalleryOne + "." + pictureGalleryOne.getOriginalFilename();
-
-            pictureGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
-
-            cinema.setPictureGalleryOne(resultFilenameGalleryOne);
-        }
-        if (pictureGalleryTwo != null   && !pictureGalleryTwo.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryTwo = new File(uploadPath);
-            if (!uploadDirGalleryTwo.exists()) {
-                uploadDirGalleryTwo.mkdir();
-            }
-
-            String uuidFileGalleryTwo = UUID.randomUUID().toString();
-            String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + pictureGalleryTwo.getOriginalFilename();
-
-            pictureGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
-
-            cinema.setPictureGalleryTwo(resultFilenameGalleryTwo);
-        }
-        if (pictureGalleryThree != null   && !pictureGalleryThree.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryThree = new File(uploadPath);
-            if (!uploadDirGalleryThree.exists()) {
-                uploadDirGalleryThree.mkdir();
-            }
-
-            String uuidFileGalleryThree = UUID.randomUUID().toString();
-            String resultFilenameGalleryThree = uuidFileGalleryThree + "." + pictureGalleryThree.getOriginalFilename();
-
-            pictureGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
-
-            cinema.setPictureGalleryThree(resultFilenameGalleryThree);
-        }
-        if (pictureGalleryFour != null   && !pictureGalleryFour.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFour = new File(uploadPath);
-            if (!uploadDirGalleryFour.exists()) {
-                uploadDirGalleryFour.mkdir();
-            }
-
-            String uuidFileGalleryFour = UUID.randomUUID().toString();
-            String resultFilenameGalleryFour = uuidFileGalleryFour + "." + pictureGalleryFour.getOriginalFilename();
-
-            pictureGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
-
-            cinema.setPictureGalleryFour(resultFilenameGalleryFour);
-        }
-        if (pictureGalleryFive != null   && !pictureGalleryFive.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFive = new File(uploadPath);
-            if (!uploadDirGalleryFive.exists()) {
-                uploadDirGalleryFive.mkdir();
-            }
-
-            String uuidFileGalleryFive = UUID.randomUUID().toString();
-            String resultFilenameGalleryFive = uuidFileGalleryFive + "." + pictureGalleryFive.getOriginalFilename();
-
-            pictureGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
-
-            cinema.setPictureGalleryFive(resultFilenameGalleryFive);
-        }
-
-
-
-        cinemasService.createCinemas(cinema);
 
         Iterable<Cinemas> cinemas1 = cinemasService.getAllCinemas();
 
-        model.put("cinemas1", cinemas1);
+        model.addAttribute("cinemas1", cinemas1);
         // model.put("filter","");
 
         return "redirect:/cinemas";

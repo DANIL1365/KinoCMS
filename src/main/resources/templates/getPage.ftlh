@@ -12,14 +12,9 @@
                         <h3><span>${pagePagesUser.namePage}</span></h3>
                         <ul class="post-meta list-inline">
                             <li class="list-inline-item">
-                                <i class="fa fa-user-circle-o"></i> <a href="#">John Doe</a>
+                                <i class="fa fa-calendar-o"></i> <a href="#">${pagePagesUser.dateCreation}</a>
                             </li>
-                            <li class="list-inline-item">
-                                <i class="fa fa-calendar-o"></i> <a href="#">29 June 2017</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <i class="fa fa-tags"></i> <a href="#">Bootstrap4</a>
-                            </li>
+
                         </ul>
                         <p>${pagePagesUser.description}</p>
 
@@ -50,25 +45,17 @@
             </div>
             <div class="col-md-3 mb40">
                 <div>
-                    <h4 class="sidebar-title">News</h4>
+                    <h4 class="sidebar-title">Новости</h4>
                     <ul class="list-unstyled">
                         <li class="media">
-                            <img class="d-flex mr-3 img-fluid" width="64" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Generic placeholder image">
+                            <#list newsUser as news>
+                            <#if news.mainNewsPicture??>
+                            <img class="d-flex mr-3 img-fluid" width="64" src="/img/${news.mainNewsPicture}" alt="Generic placeholder image">
+                            </#if>
                             <div class="media-body">
-                                <h5 class="mt-0 mb-1"><a href="#">Lorem ipsum dolor sit amet</a></h5> April 05, 2017
+                                <h5 class="mt-0 mb-1"><a href="/news/edit/${news.id}">${news.nameNews}</a></h5> ${news.publicationDate}
                             </div>
-                        </li>
-                        <li class="media my-4">
-                            <img class="d-flex mr-3 img-fluid" width="64" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1"><a href="#">Lorem ipsum dolor sit amet</a></h5> Jan 05, 2017
-                            </div>
-                        </li>
-                        <li class="media">
-                            <img class="d-flex mr-3 img-fluid" width="64" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="Generic placeholder image">
-                            <div class="media-body">
-                                <h5 class="mt-0 mb-1"><a href="#">Lorem ipsum dolor sit amet</a></h5> March 15, 2017
-                            </div>
+                            </#list>
                         </li>
                     </ul>
                 </div>

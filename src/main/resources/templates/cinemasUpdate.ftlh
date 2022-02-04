@@ -19,53 +19,71 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Название : </label>
                                         <div class="col-sm-6">
-                                            <input type="text" name="nameCinema" class="form-control" placeholder="name cinemas" />
+                                            <input type="text" name="nameCinema"
+                                                   class="form-control ${(nameCinemaError??)?string('is-invalid', '')}"
+                                                   value="<#if cinemas??>${cinemas.nameCinema}</#if>"
+                                                   placeholder="Введите название ..." />
+                                            <#if nameCinemaError??>
+                                                <div class="invalid-feedback">
+                                                    ${nameCinemaError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Описание : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="descriptionCinema" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="descriptionCinema" class="form-control ${(descriptionCinemaError??)?string('is-invalid', '')}" placeholder="Введите ..."><#if cinemas??>${cinemas.descriptionCinema}</#if></textarea>
+                                            <#if descriptionCinemaError??>
+                                                <div class="invalid-feedback">
+                                                    ${descriptionCinemaError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Условия : </label>
                                         <div class="col-sm-6">
-                                            <textarea rows="5" type="text" name="conditionsCinema" class="form-control" placeholder="Введите описание"></textarea>
+                                            <textarea rows="5" type="text" name="conditionsCinema" class="form-control ${(conditionsCinemaError??)?string('is-invalid', '')}" placeholder="Введите ..."><#if cinemas??>${cinemas.conditionsCinema}</#if></textarea>
+                                            <#if conditionsCinemaError??>
+                                                <div class="invalid-feedback">
+                                                    ${conditionsCinemaError}
+                                                </div>
+                                            </#if>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Logo : </label>
                                         <div class="custom-file">
-                                            <input type="file" class="form-control" id="logo" name="logo">
+                                            <input type="file" class="form-control" id="logo" name="logoPicture">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label"> Banner : </label>
                                         <div class="custom-file">
-                                            <input type="file" class="form-control" id="topBanner" name="topBanner">
+                                            <input type="file" class="form-control" id="topBanner" name="top">
                                         </div>
                                     </div>
                                     <h5>Галерея картинок</h5>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryOne">Первая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryOne" id="pictureGalleryOne">
+                                        <input type="file" class="form-control" name="galleryOne" id="pictureGalleryOne">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryTwo">Вторая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryTwo" id="pictureGalleryTwo">
+                                        <input type="file" class="form-control" name="galleryTwo" id="pictureGalleryTwo">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryThree">Третья картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryThree" id="pictureGalleryThree">
+                                        <input type="file" class="form-control" name="galleryThree" id="pictureGalleryThree">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryFour">Четвертая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryFour" id="pictureGalleryFour">
+                                        <input type="file" class="form-control" name="galleryFour" id="pictureGalleryFour">
                                     </div>
                                     <div class="form-group row">
                                         <label class="form-label" for="pictureGalleryFive">Пятая картинка</label>
-                                        <input type="file" class="form-control" name="pictureGalleryFive" id="pictureGalleryFive">
+                                        <input type="file" class="form-control" name="galleryFive" id="pictureGalleryFive">
                                     </div>
                                     <input type="hidden" value="${cinemas.id}" name="cinemasId">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}" />

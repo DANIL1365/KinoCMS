@@ -15,25 +15,25 @@
                             </div>
                             <div class="form-group mt-2">
                                 <div class="col-lg-3 col-md-4 col-6 custom-file">
-                                    <label class="custom-file-label" for="secondTopImage">Первая картинка</label>
+                                    <label class="custom-file-label" for="secondTopImage">Вторая картинка</label>
                                     <input type="file" class="custom-file-input" name="secondTopImage" id="secondTopImage">
                                 </div>
                             </div>
                             <div class="form-group mt-2">
                                 <div class="col-lg-3 col-md-4 col-6 custom-file">
-                                    <label class="custom-file-label" for="thirdTopImage">Первая картинка</label>
+                                    <label class="custom-file-label" for="thirdTopImage">Третья картинка</label>
                                     <input type="file" class="custom-file-input" name="thirdTopImage" id="thirdTopImage">
                                 </div>
                             </div>
                             <div class="form-group mt-2">
                                 <div class="col-lg-3 col-md-4 col-6 custom-file">
-                                    <label class="custom-file-label" for="fourthTopImage">Первая картинка</label>
+                                    <label class="custom-file-label" for="fourthTopImage">Четвертая картинка</label>
                                     <input type="file" class="custom-file-input" name="fourthTopImage" id="fourthTopImage">
                                 </div>
                             </div>
                             <div class="form-group mt-2">
                                 <div class="col-lg-3 col-md-4 col-6 custom-file">
-                                    <label class="custom-file-label" for="fifthTopImage">Первая картинка</label>
+                                    <label class="custom-file-label" for="fifthTopImage">Пятая картинка</label>
                                     <input type="file" class="custom-file-input" name="fifthTopImage" id="fifthTopImage">
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                     <div class="form-group mt-3">
                         <div class="form-group mt-2">
                             <div class="col-lg-3 col-md-4 col-6 custom-file">
-                                <label class="custom-file-label" for="pictureBanner"></label>
+                                <label class="custom-file-label" for="pictureBanner">Фоновое изображение</label>
                                 <input type="file" class="custom-file-input" name="pictureBanner" id="pictureBanner">
                             </div>
                         </div>

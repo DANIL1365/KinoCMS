@@ -293,5 +293,39 @@ public class UserPartController {
         return "userNews";
     }
 
+    @GetMapping("/getContactPage")
+    public String contactEdit(Model model) {
+
+        Iterable<ContactPage> contactPageUser = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPageUser", contactPageUser);
+
+        Iterable<CurrentFilms> userFilms = filmsService.getAllCurrentFilms();
+
+        model.addAttribute("userFilms", userFilms);
+
+        Iterable<SoonFilms> soonFilmsUser = soonFilmsService.getAllSoonFilms();
+
+        model.addAttribute("soonFilmsUser", soonFilmsUser);
+
+        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+
+        model.addAttribute("mainImageBanners", mainImageBanners);
+
+        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+
+        model.addAttribute("mainPage", mainPage);
+
+        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+
+        model.addAttribute("pagePages", pagePages);
+
+        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+
+        model.addAttribute("contactPages", contactPages);
+
+        return "getContactPage";
+    }
+
 
 }

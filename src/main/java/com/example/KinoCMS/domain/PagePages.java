@@ -23,6 +23,9 @@ public class PagePages {
     @NotNull(message = "Date may not be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCreation;
+    @Column(name = "on_of")
+    private Boolean onOf;
+
     @Column(name = "page_picture")
     private String pagePicture;
     @Column(name = "picture_gallery_one")
@@ -35,23 +38,9 @@ public class PagePages {
     private String pictureGalleryFour;
     @Column(name = "picture_gallery_five")
     private String pictureGalleryFive;
-    @Column(name = "on_of")
-    private Boolean onOf;
 
     public PagePages() {
     }
-
-//    public PagePages(String namePage, String description, LocalDate dateCreation, String pagePicture, String pictureGalleryOne, String pictureGalleryTwo, String pictureGalleryThree, String pictureGalleryFour, String pictureGalleryFive) {
-//        this.namePage = namePage;
-//        this.description = description;
-//        this.dateCreation = dateCreation;
-//        this.pagePicture = pagePicture;
-//        this.pictureGalleryOne = pictureGalleryOne;
-//        this.pictureGalleryTwo = pictureGalleryTwo;
-//        this.pictureGalleryThree = pictureGalleryThree;
-//        this.pictureGalleryFour = pictureGalleryFour;
-//        this.pictureGalleryFive = pictureGalleryFive;
-//    }
 
 
     public PagePages(String namePage, String description, LocalDate dateCreation, Boolean onOf) {
@@ -69,11 +58,6 @@ public class PagePages {
         this.onOf = onOf;
     }
 
-    public PagePages(String namePage, String description, LocalDate dateCreation) {
-        this.namePage = namePage;
-        this.description = description;
-        this.dateCreation = dateCreation;
-    }
 
     public PagePages(Long id, String namePage, String description, LocalDate dateCreation) {
         this.id = id;

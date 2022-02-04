@@ -1,6 +1,10 @@
 package com.example.KinoCMS.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -11,43 +15,39 @@ public class ContactPage {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @Column(name = "name_cinema")
+    @NotBlank(message = "Name cannot be empty")
     private String nameCinema;
     @Column(name = "address")
+    @NotBlank(message = "Address cannot be empty")
     private String address;
     @Column(name = "date_creation")
+    @NotNull(message = "Date may not be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateCreation;
     @Column(name = "map_coordinates")
     private String mapCoordinates;
     @Column(name = "contact_logo")
     private String contactLogo;
+    @Column(name = "on_of")
+    private Boolean onOf;
 
     public ContactPage() {
     }
 
-    public ContactPage(Long id, String nameCinema, String address, LocalDate dateCreation, String mapCoordinates, String contactLogo) {
+    public ContactPage(String nameCinema, String address, LocalDate dateCreation, String mapCoordinates, Boolean onOf) {
+        this.nameCinema = nameCinema;
+        this.address = address;
+        this.dateCreation = dateCreation;
+        this.onOf = onOf;
+    }
+
+    public ContactPage(Long id, String nameCinema, String address, LocalDate dateCreation, String mapCoordinates, Boolean onOf) {
         this.id = id;
         this.nameCinema = nameCinema;
         this.address = address;
         this.dateCreation = dateCreation;
-        this.mapCoordinates = mapCoordinates;
-        this.contactLogo = contactLogo;
+        this.onOf = onOf;
     }
-
-    public ContactPage(Long id, String nameCinema, String address, LocalDate dateCreation, String mapCoordinates) {
-        this.id = id;
-        this.nameCinema = nameCinema;
-        this.address = address;
-        this.dateCreation = dateCreation;
-        this.mapCoordinates = mapCoordinates;
-    }
-
-    public ContactPage(String nameCinema, String address, LocalDate dateCreation, String mapCoordinates) {
-        this.nameCinema = nameCinema;
-        this.address = address;
-        this.dateCreation = dateCreation;
-        this.mapCoordinates = mapCoordinates;
-    }
-
 
     public Long getId() {
         return id;
@@ -95,5 +95,26 @@ public class ContactPage {
 
     public void setContactLogo(String contactLogo) {
         this.contactLogo = contactLogo;
+    }
+
+    public Boolean getOnOf() {
+        return onOf;
+    }
+
+    public void setOnOf(Boolean onOf) {
+        this.onOf = onOf;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactPage{" +
+                "id=" + id +
+                ", nameCinema='" + nameCinema + '\'' +
+                ", address='" + address + '\'' +
+                ", dateCreation=" + dateCreation +
+                ", mapCoordinates='" + mapCoordinates + '\'' +
+                ", contactLogo='" + contactLogo + '\'' +
+                ", onOf=" + onOf +
+                '}';
     }
 }

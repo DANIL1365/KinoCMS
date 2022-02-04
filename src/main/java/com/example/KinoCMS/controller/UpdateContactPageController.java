@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -42,6 +44,9 @@ public class UpdateContactPageController {
     @Autowired
     private FilmsService filmsService;
 
+    @Autowired
+    private SoonFilmsService soonFilmsService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
@@ -51,66 +56,113 @@ public class UpdateContactPageController {
         return "contactPageUpdate";
     }
 
-    @GetMapping("/edit/{id}")
-    public String contactEdit(@PathVariable("id") Long id, Model model) {
+    @GetMapping
+    public String contactList(Model model) {
+        model.addAttribute("contacts", contactPageService.getAllContactPages());
 
-        ContactPage contactPageUser = contactPageService.getContactPageById(id);
+        return "contactList";
+    }
 
-        model.addAttribute("contactPageUser", contactPageUser);
+//    @GetMapping("/getContactPage")
+//    public String contactEdit(Model model) {
+//
+//        Iterable<ContactPage> contactPageUser = contactPageService.getAllContactPages();
+//
+//        model.addAttribute("contactPageUser", contactPageUser);
+//
+//        Iterable<CurrentFilms> userFilms = filmsService.getAllCurrentFilms();
+//
+//        model.addAttribute("userFilms", userFilms);
+//
+//        Iterable<SoonFilms> soonFilmsUser = soonFilmsService.getAllSoonFilms();
+//
+//        model.addAttribute("soonFilmsUser", soonFilmsUser);
+//
+//        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+//
+//        model.addAttribute("mainImageBanners", mainImageBanners);
+//
+//        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+//
+//        model.addAttribute("mainPage", mainPage);
+//
+//        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+//
+//        model.addAttribute("pagePages", pagePages);
+//
+//
+//        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
+//
+//        model.addAttribute("contactPages", contactPages);
+//
+//        return "getContactPage";
 
-        Iterable<MainImageBanner> mainImageBanners = mainBannerService.getAllBanners();
+//    }
 
-        model.addAttribute("mainImageBanners", mainImageBanners);
+    @PostMapping
+    public String updateContactPage(
+            @RequestParam("contactPageId") Long id,
+            @Valid ContactPage contactPage,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam(defaultValue = "false") Boolean onOf,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("file2") MultipartFile file2
+    ) throws IOException {
+        contactPage.setId(id);
+        contactPage.setOnOf(onOf);
 
-        Iterable<MainPage> mainPage = mainPageService.getAllMainPages();
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
-        model.addAttribute("mainPage", mainPage);
 
-        Iterable<PagePages> pagePages = pagePagesService.getAllPagePages();
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("contactPage", contactPage);
 
-        model.addAttribute("pagePages", pagePages);
+            return "contactPageUpdate";
+        } else {
+//        ContactPage contactPage = new ContactPage(id, nameCinema, address, dateCreation, mapCoordinates, onOf);
+
+            if (file != null && !file.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + file.getOriginalFilename();
+
+                file.transferTo(new File(uploadPath + "/" + resultFilename));
+
+                contactPage.setContactLogo(resultFilename);
+            }
+            if (file2 != null && !file2.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + file2.getOriginalFilename();
+
+                file2.transferTo(new File(uploadPath + "/" + resultFilename));
+
+                contactPage.setMapCoordinates(resultFilename);
+            }
+
+            model.addAttribute("contactPage", null);
+
+            contactPageService.createContactPage(contactPage);
+
+        }
 
         Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
 
         model.addAttribute("contactPages", contactPages);
 
-        return "getContactPage";
-
-    }
-
-    @PostMapping
-    public String updateContactPage(
-            @RequestParam("contactPageId") Long id,
-            @RequestParam String nameCinema,
-            @RequestParam String address,
-            @RequestParam("dateCreation")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateCreation,
-            @RequestParam String mapCoordinates,
-            @RequestParam("contactLogo") MultipartFile contactLogo,
-            Map<String, Object> model) throws IOException {
-        ContactPage contactPage = new ContactPage(id, nameCinema, address, dateCreation, mapCoordinates);
-
-        if (contactLogo != null  && !contactLogo.getOriginalFilename().isEmpty()) {
-            File uploadDircontactLogo = new File(uploadPath);
-            if (!uploadDircontactLogo.exists()) {
-                uploadDircontactLogo.mkdir();
-            }
-
-            String uuidFileMain = UUID.randomUUID().toString();
-            String resultFilenameMain = uuidFileMain + "." + contactLogo.getOriginalFilename();
-
-            contactLogo.transferTo(new File(uploadPath + "/" + resultFilenameMain));
-
-            contactPage.setContactLogo(resultFilenameMain);
-        }
-
-
-        contactPageService.createContactPage(contactPage);
-
-        Iterable<ContactPage> contactPages = contactPageService.getAllContactPages();
-
-        model.put("contactPages", contactPages);
-
-        return "redirect:/pagePages";
+        return "redirect:/contactPage";
     }
 }

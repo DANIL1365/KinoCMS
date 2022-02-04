@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 //import javax.validation.Valid;
 //import javax.validation.Valid;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -69,118 +70,130 @@ public class CinemasController {
 
     @PostMapping("/cinemasAdd")
     public String addNewCinemas(
-            @RequestParam String nameCinema,
-            @RequestParam String descriptionCinema,
-            @RequestParam String conditionsCinema,
-            @RequestParam("logo") MultipartFile logo,
-            @RequestParam("topBanner") MultipartFile topBanner,
-            @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
-            @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
-            @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
-            @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
-            @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
-            Map<String, Object> model) throws IOException {
-        Cinemas cinema = new Cinemas(nameCinema, descriptionCinema, conditionsCinema);
+            @Valid Cinemas cinemas,
+            BindingResult bindingResult,
+            Model model,
+            @RequestParam("logoPicture") MultipartFile logoPicture,
+            @RequestParam("top") MultipartFile top,
+            @RequestParam("galleryOne") MultipartFile galleryOne,
+            @RequestParam("galleryTwo") MultipartFile galleryTwo,
+            @RequestParam("galleryThree") MultipartFile galleryThree,
+            @RequestParam("galleryFour") MultipartFile galleryFour,
+            @RequestParam("galleryFive") MultipartFile galleryFive
+    ) throws IOException {
 
-            if (logo != null && !logo.getOriginalFilename().isEmpty()) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+
+
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("cinemas", cinemas);
+
+            return "cinemasAdd";
+        } else {
+
+            if (logoPicture != null && !logoPicture.getOriginalFilename().isEmpty()) {
                 File uploadDirlogo = new File(uploadPath);
                 if (!uploadDirlogo.exists()) {
                     uploadDirlogo.mkdir();
                 }
 
                 String uuidFilelogo = UUID.randomUUID().toString();
-                String resultFilenamelogo = uuidFilelogo + "." + logo.getOriginalFilename();
+                String resultFilenamelogo = uuidFilelogo + "." + logoPicture.getOriginalFilename();
 
-                logo.transferTo(new File(uploadPath + "/" + resultFilenamelogo));
+                logoPicture.transferTo(new File(uploadPath + "/" + resultFilenamelogo));
 
-                cinema.setLogo(resultFilenamelogo);
+                cinemas.setLogo(resultFilenamelogo);
             }
-            if (topBanner != null && !topBanner.getOriginalFilename().isEmpty()) {
+            if (top != null && !top.getOriginalFilename().isEmpty()) {
                 File uploadDirtopBanner = new File(uploadPath);
                 if (!uploadDirtopBanner.exists()) {
                     uploadDirtopBanner.mkdir();
                 }
 
                 String uuidFiletopBanner = UUID.randomUUID().toString();
-                String resultFilenametopBanner = uuidFiletopBanner + "." + logo.getOriginalFilename();
+                String resultFilenametopBanner = uuidFiletopBanner + "." + top.getOriginalFilename();
 
-                logo.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
+                top.transferTo(new File(uploadPath + "/" + resultFilenametopBanner));
 
-                cinema.setTopBanner(resultFilenametopBanner);
+                cinemas.setTopBanner(resultFilenametopBanner);
             }
-            if (pictureGalleryOne != null && !pictureGalleryOne.getOriginalFilename().isEmpty()) {
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
                 File uploadDirGalleryOne = new File(uploadPath);
                 if (!uploadDirGalleryOne.exists()) {
                     uploadDirGalleryOne.mkdir();
                 }
 
                 String uuidFileGalleryOne = UUID.randomUUID().toString();
-                String resultFilenameGalleryOne = uuidFileGalleryOne + "." + pictureGalleryOne.getOriginalFilename();
+                String resultFilenameGalleryOne = uuidFileGalleryOne + "." + galleryOne.getOriginalFilename();
 
-                pictureGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
 
-                cinema.setPictureGalleryOne(resultFilenameGalleryOne);
+                cinemas.setPictureGalleryOne(resultFilenameGalleryOne);
             }
-            if (pictureGalleryTwo != null && !pictureGalleryTwo.getOriginalFilename().isEmpty()) {
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
                 File uploadDirGalleryTwo = new File(uploadPath);
                 if (!uploadDirGalleryTwo.exists()) {
                     uploadDirGalleryTwo.mkdir();
                 }
 
                 String uuidFileGalleryTwo = UUID.randomUUID().toString();
-                String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + pictureGalleryTwo.getOriginalFilename();
+                String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + galleryTwo.getOriginalFilename();
 
-                pictureGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
 
-                cinema.setPictureGalleryTwo(resultFilenameGalleryTwo);
+                cinemas.setPictureGalleryTwo(resultFilenameGalleryTwo);
             }
-            if (pictureGalleryThree != null && !pictureGalleryThree.getOriginalFilename().isEmpty()) {
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
                 File uploadDirGalleryThree = new File(uploadPath);
                 if (!uploadDirGalleryThree.exists()) {
                     uploadDirGalleryThree.mkdir();
                 }
 
                 String uuidFileGalleryThree = UUID.randomUUID().toString();
-                String resultFilenameGalleryThree = uuidFileGalleryThree + "." + pictureGalleryThree.getOriginalFilename();
+                String resultFilenameGalleryThree = uuidFileGalleryThree + "." + galleryThree.getOriginalFilename();
 
-                pictureGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
 
-                cinema.setPictureGalleryThree(resultFilenameGalleryThree);
+                cinemas.setPictureGalleryThree(resultFilenameGalleryThree);
             }
-            if (pictureGalleryFour != null && !pictureGalleryFour.getOriginalFilename().isEmpty()) {
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
                 File uploadDirGalleryFour = new File(uploadPath);
                 if (!uploadDirGalleryFour.exists()) {
                     uploadDirGalleryFour.mkdir();
                 }
 
                 String uuidFileGalleryFour = UUID.randomUUID().toString();
-                String resultFilenameGalleryFour = uuidFileGalleryFour + "." + pictureGalleryFour.getOriginalFilename();
+                String resultFilenameGalleryFour = uuidFileGalleryFour + "." + galleryFour.getOriginalFilename();
 
-                pictureGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
 
-                cinema.setPictureGalleryFour(resultFilenameGalleryFour);
+                cinemas.setPictureGalleryFour(resultFilenameGalleryFour);
             }
-            if (pictureGalleryFive != null && !pictureGalleryFive.getOriginalFilename().isEmpty()) {
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
                 File uploadDirGalleryFive = new File(uploadPath);
                 if (!uploadDirGalleryFive.exists()) {
                     uploadDirGalleryFive.mkdir();
                 }
 
                 String uuidFileGalleryFive = UUID.randomUUID().toString();
-                String resultFilenameGalleryFive = uuidFileGalleryFive + "." + pictureGalleryFive.getOriginalFilename();
+                String resultFilenameGalleryFive = uuidFileGalleryFive + "." + galleryFive.getOriginalFilename();
 
-                pictureGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
 
-                cinema.setPictureGalleryFive(resultFilenameGalleryFive);
+                cinemas.setPictureGalleryFive(resultFilenameGalleryFive);
             }
 
+            model.addAttribute("cinemas", null);
+            cinemasService.createCinemas(cinemas);
 
-            cinemasService.createCinemas(cinema);
+        }
 
 
         Iterable<Cinemas> cinemas1 = cinemasService.getAllCinemas();
 
-        model.put("cinemas1", cinemas1);
+        model.addAttribute("cinemas1", cinemas1);
         // model.put("filter","");
 
         return "redirect:/cinemas";

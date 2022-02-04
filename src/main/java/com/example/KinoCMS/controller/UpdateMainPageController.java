@@ -31,9 +31,13 @@ public class UpdateMainPageController {
     @PostMapping
     public String updateMainPage(
             @RequestParam("mainPageId") Long id,
-            @Valid MainPage mainPage, BindingResult bindingResult, Model model
+            @RequestParam(defaultValue = "false") Boolean onOf,
+            @Valid MainPage mainPage,
+            BindingResult bindingResult,
+            Model model
     ) throws IOException {
         mainPage.setId(id);
+        mainPage.setOnOf(onOf);
 
         if (bindingResult.hasErrors()) {
             Map<String, String> errors = ControllerUtils.getErrors(bindingResult);

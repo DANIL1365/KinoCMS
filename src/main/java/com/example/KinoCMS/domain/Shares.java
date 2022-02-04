@@ -1,6 +1,10 @@
 package com.example.KinoCMS.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -10,9 +14,13 @@ public class Shares {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     @Column(name = "name_shares")
+    @NotBlank(message = "Name page cannot be empty")
     private String nameShares;
     @Column(name = "public_date")
+    @NotNull(message = "Date may not be null")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate publicationDate;
+    @NotBlank(message = "Description cannot be empty")
     private String description;
     @Column(name = "main_shares_picture")
     private String mainSharesPicture;
@@ -27,6 +35,7 @@ public class Shares {
     @Column(name = "picture_gallery_five")
     private String pictureSharesGalleryFive;
     @Column(name = "video_link")
+    @NotBlank(message = "Video cannot be empty")
     private String videoLink;
 
     public Shares() {
@@ -133,5 +142,22 @@ public class Shares {
 
     public void setVideoLink(String videoLink) {
         this.videoLink = videoLink;
+    }
+
+    @Override
+    public String toString() {
+        return "Shares{" +
+                "id=" + id +
+                ", nameShares='" + nameShares + '\'' +
+                ", publicationDate=" + publicationDate +
+                ", description='" + description + '\'' +
+                ", mainSharesPicture='" + mainSharesPicture + '\'' +
+                ", pictureSharesGalleryOne='" + pictureSharesGalleryOne + '\'' +
+                ", pictureSharesGalleryTwo='" + pictureSharesGalleryTwo + '\'' +
+                ", pictureSharesGalleryThree='" + pictureSharesGalleryThree + '\'' +
+                ", pictureSharesGalleryFour='" + pictureSharesGalleryFour + '\'' +
+                ", pictureSharesGalleryFive='" + pictureSharesGalleryFive + '\'' +
+                ", videoLink='" + videoLink + '\'' +
+                '}';
     }
 }

@@ -2,19 +2,18 @@ package com.example.KinoCMS.controller;
 
 
 import com.example.KinoCMS.domain.*;
-import com.example.KinoCMS.service.ContactPageService;
-import com.example.KinoCMS.service.MainBannerService;
-import com.example.KinoCMS.service.MainPageService;
-import com.example.KinoCMS.service.PagePagesService;
+import com.example.KinoCMS.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,6 +35,9 @@ public class UpdatePagesController {
 
     @Autowired
     MainBannerService mainBannerService;
+
+    @Autowired
+    private NewsService newsService;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -78,6 +80,10 @@ public class UpdatePagesController {
 
         model.addAttribute("contactPages", contactPages);
 
+        Iterable<News> newsUser = newsService.getAllNews();
+
+        model.addAttribute("newsUser", newsUser);
+
         return "getPage";
     }
 
@@ -92,104 +98,121 @@ public class UpdatePagesController {
     @PostMapping("/updatePage")
     public String updatePage(
             @RequestParam("pageId") Long id,
-            @RequestParam String namePage,
-            @RequestParam String description,
-            @RequestParam("dateCreation")
-            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dateCreation,
+            @Valid PagePages pagePages,
+            BindingResult bindingResult,
+            Model model,
             @RequestParam(defaultValue = "false") Boolean onOf,
-            @RequestParam("pagePicture") MultipartFile pagePicture,
-            @RequestParam("pictureGalleryOne") MultipartFile pictureGalleryOne,
-            @RequestParam("pictureGalleryTwo") MultipartFile pictureGalleryTwo,
-            @RequestParam("pictureGalleryThree") MultipartFile pictureGalleryThree,
-            @RequestParam("pictureGalleryFour") MultipartFile pictureGalleryFour,
-            @RequestParam("pictureGalleryFive") MultipartFile pictureGalleryFive,
-                             Map<String, Object> model) throws IOException {
-        PagePages pagePages = new PagePages(id, namePage, description, dateCreation, onOf);
+            @RequestPart("main") MultipartFile main,
+            @RequestPart("galleryOne") MultipartFile galleryOne,
+            @RequestPart("galleryTwo") MultipartFile galleryTwo,
+            @RequestPart("galleryThree") MultipartFile galleryThree,
+            @RequestPart("galleryFour") MultipartFile galleryFour,
+            @RequestPart("galleryFive") MultipartFile galleryFive
 
-        if (pagePicture != null  && !pagePicture.getOriginalFilename().isEmpty()) {
-            File uploadDirpagePicture = new File(uploadPath);
-            if (!uploadDirpagePicture.exists()) {
-                uploadDirpagePicture.mkdir();
+//            Map<String, Object> model
+    ) throws IOException {
+        pagePages.setId(id);
+        pagePages.setOnOf(onOf);
+
+        if (bindingResult.hasErrors()) {
+            System.out.println("Errors:" + bindingResult.getAllErrors());
+            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
+
+
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("pagePages", pagePages);
+
+            return "pageUpdate";
+        } else {
+//        PagePages pagePages = new PagePages(namePage, description, dateCreation, onOf);
+            if (main != null && !main.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
+
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + main.getOriginalFilename();
+
+                main.transferTo(new File(uploadPath + "/" + resultFilename));
+
+
+                pagePages.setPagePicture(resultFilename);
             }
+            if (galleryOne != null && !galleryOne.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
 
-            String uuidFilepagePicture = UUID.randomUUID().toString();
-            String resultFilenamepagePicture = uuidFilepagePicture + "." + pagePicture.getOriginalFilename();
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + galleryOne.getOriginalFilename();
 
-            pagePicture.transferTo(new File(uploadPath + "/" + resultFilenamepagePicture));
+                galleryOne.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            pagePages.setPagePicture(resultFilenamepagePicture);
-        }
-        if (pictureGalleryOne != null   && !pictureGalleryOne.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryOne = new File(uploadPath);
-            if (!uploadDirGalleryOne.exists()) {
-                uploadDirGalleryOne.mkdir();
+                pagePages.setPictureGalleryOne(resultFilename);
             }
+            if (galleryTwo != null && !galleryTwo.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
 
-            String uuidFileGalleryOne = UUID.randomUUID().toString();
-            String resultFilenameGalleryOne = uuidFileGalleryOne + "." + pictureGalleryOne.getOriginalFilename();
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + galleryTwo.getOriginalFilename();
 
-            pictureGalleryOne.transferTo(new File(uploadPath + "/" + resultFilenameGalleryOne));
+                galleryTwo.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            pagePages.setPictureGalleryOne(resultFilenameGalleryOne);
-        }
-        if (pictureGalleryTwo != null   && !pictureGalleryTwo.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryTwo = new File(uploadPath);
-            if (!uploadDirGalleryTwo.exists()) {
-                uploadDirGalleryTwo.mkdir();
+                pagePages.setPictureGalleryTwo(resultFilename);
             }
+            if (galleryThree != null && !galleryThree.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
 
-            String uuidFileGalleryTwo = UUID.randomUUID().toString();
-            String resultFilenameGalleryTwo = uuidFileGalleryTwo + "." + pictureGalleryTwo.getOriginalFilename();
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + galleryThree.getOriginalFilename();
 
-            pictureGalleryTwo.transferTo(new File(uploadPath + "/" + resultFilenameGalleryTwo));
+                galleryThree.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            pagePages.setPictureGalleryTwo(resultFilenameGalleryTwo);
-        }
-        if (pictureGalleryThree != null   && !pictureGalleryThree.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryThree = new File(uploadPath);
-            if (!uploadDirGalleryThree.exists()) {
-                uploadDirGalleryThree.mkdir();
+                pagePages.setPictureGalleryThree(resultFilename);
             }
+            if (galleryFour != null && !galleryFour.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
 
-            String uuidFileGalleryThree = UUID.randomUUID().toString();
-            String resultFilenameGalleryThree = uuidFileGalleryThree + "." + pictureGalleryThree.getOriginalFilename();
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + galleryFour.getOriginalFilename();
 
-            pictureGalleryThree.transferTo(new File(uploadPath + "/" + resultFilenameGalleryThree));
+                galleryFour.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            pagePages.setPictureGalleryThree(resultFilenameGalleryThree);
-        }
-        if (pictureGalleryFour != null   && !pictureGalleryFour.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFour = new File(uploadPath);
-            if (!uploadDirGalleryFour.exists()) {
-                uploadDirGalleryFour.mkdir();
+                pagePages.setPictureGalleryFour(resultFilename);
             }
+            if (galleryFive != null && !galleryFive.getOriginalFilename().isEmpty()) {
+                File uploadDir = new File(uploadPath);
+                if (!uploadDir.exists()) {
+                    uploadDir.mkdir();
+                }
 
-            String uuidFileGalleryFour = UUID.randomUUID().toString();
-            String resultFilenameGalleryFour = uuidFileGalleryFour + "." + pictureGalleryFour.getOriginalFilename();
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + "." + galleryFive.getOriginalFilename();
 
-            pictureGalleryFour.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFour));
+                galleryFive.transferTo(new File(uploadPath + "/" + resultFilename));
 
-            pagePages.setPictureGalleryFour(resultFilenameGalleryFour);
-        }
-        if (pictureGalleryFive != null   && !pictureGalleryFive.getOriginalFilename().isEmpty()) {
-            File uploadDirGalleryFive = new File(uploadPath);
-            if (!uploadDirGalleryFive.exists()) {
-                uploadDirGalleryFive.mkdir();
+                pagePages.setPictureGalleryFive(resultFilename);
             }
+            model.addAttribute("pagePages", null);
 
-            String uuidFileGalleryFive = UUID.randomUUID().toString();
-            String resultFilenameGalleryFive = uuidFileGalleryFive + "." + pictureGalleryFive.getOriginalFilename();
+            pagePagesService.createPagePages(pagePages);
 
-            pictureGalleryFive.transferTo(new File(uploadPath + "/" + resultFilenameGalleryFive));
-
-            pagePages.setPictureGalleryFive(resultFilenameGalleryFive);
         }
-
-        pagePagesService.createPagePages(pagePages);
 
         Iterable<PagePages> pages = pagePagesService.getAllPagePages();
 
-        model.put("pages", pages);
+        model.addAttribute("pages", pages);
 
         return "redirect:/pagePages";
     }

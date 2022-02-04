@@ -3,6 +3,8 @@ package com.example.KinoCMS.domain;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Entity
@@ -11,8 +13,10 @@ public class Hall {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = " Hall number cannot be empty")
     @Column(name = "hall_number")
     private String hallNumber;
+    @NotBlank(message = " Description cannot be empty")
     @Column(name = "hall_description")
     private String hallDescription;
     @Column(name = "hall_layout")
@@ -29,6 +33,7 @@ public class Hall {
     private String pictureHallGalleryFour;
     @Column(name = "picture_Hallgallery_five")
     private String pictureHallGalleryFive;
+    @NotNull(message = "Date may not be null")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date_creation")
     private LocalDate dateCreation;

@@ -42,18 +42,58 @@
                             </div>
                             <div class="cssSlider">
                                 <ul class="slides">
-                                    <li id="slide1"><img src="/img/${currentFilmsUser.pictureGalleryOne}" alt="" /></li>
-                                    <li id="slide2"><img src="/img/${currentFilmsUser.pictureGalleryTwo}" alt="" /></li>
-                                    <li id="slide3"><img src="/img/${currentFilmsUser.pictureGalleryThree}" alt="" /></li>
-                                    <li id="slide4"><img src="/img/${currentFilmsUser.pictureGalleryFour}" alt="" /></li>
-                                    <li id="slide5"><img src="/img/${currentFilmsUser.pictureGalleryFive}" alt="" /></li>
+                                    <#if currentFilmsUser.pictureGalleryOne??>
+                                        <li id="slide1"><img src="/img/${currentFilmsUser.pictureGalleryOne}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryTwo??>
+                                        <li id="slide2"><img src="/img/${currentFilmsUser.pictureGalleryTwo}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryThree??>
+                                        <li id="slide3"><img src="/img/${currentFilmsUser.pictureGalleryThree}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryFour??>
+                                        <li id="slide4"><img src="/img/${currentFilmsUser.pictureGalleryFour}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryFive??>
+                                        <li id="slide5"><img src="/img/${currentFilmsUser.pictureGalleryFive}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                                 <ul class="thumbnails">
-                                    <li><a href="#slide1"><img src="/img/${currentFilmsUser.pictureGalleryOne}" /></a></li>
-                                    <li><a href="#slide2"><img src="/img/${currentFilmsUser.pictureGalleryTwo}" /></a></li>
-                                    <li><a href="#slide3"><img src="/img/${currentFilmsUser.pictureGalleryThree}" /></a></li>
-                                    <li><a href="#slide4"><img src="/img/${currentFilmsUser.pictureGalleryFour}" /></a></li>
-                                    <li><a href="#slide5"><img src="/img/${currentFilmsUser.pictureGalleryFive}" /></a></li>
+                                    <#if currentFilmsUser.pictureGalleryOne??>
+                                        <li><a href="#slide1"><img src="/img/${currentFilmsUser.pictureGalleryOne}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryTwo??>
+                                        <li><a href="#slide2"><img src="/img/${currentFilmsUser.pictureGalleryTwo}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryThree??>
+                                        <li><a href="#slide3"><img src="/img/${currentFilmsUser.pictureGalleryThree}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryFour??>
+                                        <li><a href="#slide4"><img src="/img/${currentFilmsUser.pictureGalleryFour}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if currentFilmsUser.pictureGalleryFive??>
+                                        <li><a href="#slide5"><img src="/img/${currentFilmsUser.pictureGalleryFive}" /></a></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                             </div>
                             <div class="text-start mb-1-6 wow fadeIn mt-2">

@@ -36,22 +36,62 @@
                     </div>
                     <div class="wow fadeIn">
                         <div class="text-start mb-1-6 wow fadeIn">
-                            <#--                            <h2 class="mb-0 text-primary">Кадры и Постеры</h2>-->
+                            <h2 class="mb-0 text-primary">Кадры и Постеры</h2>
                         </div>
                         <div class="cssSlider">
                             <ul class="slides">
+                                <#if newsUser.pictureNewsGalleryOne??>
                                 <li id="slide1"><img src="/img/${newsUser.pictureNewsGalleryOne}" alt="" /></li>
+                                    <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryTwo??>
                                 <li id="slide2"><img src="/img/${newsUser.pictureNewsGalleryTwo}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryThree??>
                                 <li id="slide3"><img src="/img/${newsUser.pictureNewsGalleryThree}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryFour??>
                                 <li id="slide4"><img src="/img/${newsUser.pictureNewsGalleryFour}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryFive??>
                                 <li id="slide5"><img src="/img/${newsUser.pictureNewsGalleryFive}" alt="" /></li>
+                                <#else>
+
+                                </#if>
                             </ul>
                             <ul class="thumbnails">
+                                <#if newsUser.pictureNewsGalleryOne??>
                                 <li><a href="#slide1"><img src="/img/${newsUser.pictureNewsGalleryOne}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryTwo??>
                                 <li><a href="#slide2"><img src="/img/${newsUser.pictureNewsGalleryTwo}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryThree??>
                                 <li><a href="#slide3"><img src="/img/${newsUser.pictureNewsGalleryThree}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryFour??>
                                 <li><a href="#slide4"><img src="/img/${newsUser.pictureNewsGalleryFour}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if newsUser.pictureNewsGalleryFive??>
                                 <li><a href="#slide5"><img src="/img/${newsUser.pictureNewsGalleryFive}" /></a></li>
+                                <#else>
+
+                                </#if>
                             </ul>
                         </div>
                         <div class="text-start mb-1-6 wow fadeIn mt-2">

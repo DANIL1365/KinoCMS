@@ -23,18 +23,58 @@
                         <div class="media mb40">
                             <div class="cssSlider">
                                 <ul class="slides">
-                                    <li id="slide1"><img src="/img/${pagePagesUser.pictureGalleryOne}" alt="" /></li>
-                                    <li id="slide2"><img src="/img/${pagePagesUser.pictureGalleryTwo}" alt="" /></li>
-                                    <li id="slide3"><img src="/img/${pagePagesUser.pictureGalleryThree}" alt="" /></li>
-                                    <li id="slide4"><img src="/img/${pagePagesUser.pictureGalleryFour}" alt="" /></li>
-                                    <li id="slide5"><img src="/img/${pagePagesUser.pictureGalleryFive}" alt="" /></li>
+                                    <#if pagePagesUser.pictureGalleryOne??>
+                                        <li id="slide1"><img src="/img/${pagePagesUser.pictureGalleryOne}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryTwo??>
+                                        <li id="slide2"><img src="/img/${pagePagesUser.pictureGalleryTwo}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryThree??>
+                                        <li id="slide3"><img src="/img/${pagePagesUser.pictureGalleryThree}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryFour??>
+                                        <li id="slide4"><img src="/img/${pagePagesUser.pictureGalleryFour}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryFive??>
+                                        <li id="slide5"><img src="/img/${pagePagesUser.pictureGalleryFive}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                                 <ul class="thumbnails">
-                                    <li><a href="#slide1"><img src="/img/${pagePagesUser.pictureGalleryOne}" /></a></li>
-                                    <li><a href="#slide2"><img src="/img/${pagePagesUser.pictureGalleryTwo}" /></a></li>
-                                    <li><a href="#slide3"><img src="/img/${pagePagesUser.pictureGalleryThree}" /></a></li>
-                                    <li><a href="#slide4"><img src="/img/${pagePagesUser.pictureGalleryFour}" /></a></li>
-                                    <li><a href="#slide5"><img src="/img/${pagePagesUser.pictureGalleryFive}" /></a></li>
+                                    <#if pagePagesUser.pictureGalleryOne??>
+                                        <li><a href="#slide1"><img src="/img/${pagePagesUser.pictureGalleryOne}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryTwo??>
+                                        <li><a href="#slide2"><img src="/img/${pagePagesUser.pictureGalleryTwo}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryThree??>
+                                        <li><a href="#slide3"><img src="/img/${pagePagesUser.pictureGalleryThree}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryFour??>
+                                        <li><a href="#slide4"><img src="/img/${pagePagesUser.pictureGalleryFour}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if pagePagesUser.pictureGalleryFive??>
+                                        <li><a href="#slide5"><img src="/img/${pagePagesUser.pictureGalleryFive}" /></a></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                             </div>
                         </div>

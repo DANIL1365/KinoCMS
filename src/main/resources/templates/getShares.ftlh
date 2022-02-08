@@ -40,18 +40,58 @@
                         </div>
                         <div class="cssSlider">
                             <ul class="slides">
-                                <li id="slide1"><img src="/img/${sharesUser.pictureSharesGalleryOne}" alt="" /></li>
-                                <li id="slide2"><img src="/img/${sharesUser.pictureSharesGalleryTwo}" alt="" /></li>
-                                <li id="slide3"><img src="/img/${sharesUser.pictureSharesGalleryThree}" alt="" /></li>
-                                <li id="slide4"><img src="/img/${sharesUser.pictureSharesGalleryFour}" alt="" /></li>
-                                <li id="slide5"><img src="/img/${sharesUser.pictureSharesGalleryFive}" alt="" /></li>
+                                <#if sharesUser.pictureSharesGalleryOne??>
+                                    <li id="slide1"><img src="/img/${sharesUser.pictureSharesGalleryOne}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryTwo??>
+                                    <li id="slide2"><img src="/img/${sharesUser.pictureSharesGalleryTwo}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryThree??>
+                                    <li id="slide3"><img src="/img/${sharesUser.pictureSharesGalleryThree}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryFour??>
+                                    <li id="slide4"><img src="/img/${sharesUser.pictureSharesGalleryFour}" alt="" /></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryFive??>
+                                    <li id="slide5"><img src="/img/${sharesUser.pictureSharesGalleryFive}" alt="" /></li>
+                                <#else>
+
+                                </#if>
                             </ul>
                             <ul class="thumbnails">
-                                <li><a href="#slide1"><img src="/img/${sharesUser.pictureSharesGalleryOne}" /></a></li>
-                                <li><a href="#slide2"><img src="/img/${sharesUser.pictureSharesGalleryTwo}" /></a></li>
-                                <li><a href="#slide3"><img src="/img/${sharesUser.pictureSharesGalleryThree}" /></a></li>
-                                <li><a href="#slide4"><img src="/img/${sharesUser.pictureSharesGalleryFour}" /></a></li>
-                                <li><a href="#slide5"><img src="/img/${sharesUser.pictureSharesGalleryFive}" /></a></li>
+                                <#if sharesUser.pictureSharesGalleryOne??>
+                                    <li><a href="#slide1"><img src="/img/${sharesUser.pictureSharesGalleryOne}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryTwo??>
+                                    <li><a href="#slide2"><img src="/img/${sharesUser.pictureSharesGalleryTwo}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryThree??>
+                                    <li><a href="#slide3"><img src="/img/${sharesUser.pictureSharesGalleryThree}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryFour??>
+                                    <li><a href="#slide4"><img src="/img/${sharesUser.pictureSharesGalleryFour}" /></a></li>
+                                <#else>
+
+                                </#if>
+                                <#if sharesUser.pictureSharesGalleryFive??>
+                                    <li><a href="#slide5"><img src="/img/${sharesUser.pictureSharesGalleryFive}" /></a></li>
+                                <#else>
+
+                                </#if>
                             </ul>
                         </div>
                         <div class="text-start mb-1-6 wow fadeIn mt-2">

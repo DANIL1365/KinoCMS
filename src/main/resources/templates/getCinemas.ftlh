@@ -32,18 +32,58 @@
                         <div class="media mb40">
                             <div class="cssSlider">
                                 <ul class="slides">
-                                    <li id="slide1"><img src="/img/${cinemasUser.pictureGalleryOne}" alt="" /></li>
-                                    <li id="slide2"><img src="/img/${cinemasUser.pictureGalleryTwo}" alt="" /></li>
-                                    <li id="slide3"><img src="/img/${cinemasUser.pictureGalleryThree}" alt="" /></li>
-                                    <li id="slide4"><img src="/img/${cinemasUser.pictureGalleryFour}" alt="" /></li>
-                                    <li id="slide5"><img src="/img/${cinemasUser.pictureGalleryFive}" alt="" /></li>
+                                    <#if cinemasUser.pictureGalleryOne??>
+                                        <li id="slide1"><img src="/img/${cinemasUser.pictureGalleryOne}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryTwo??>
+                                        <li id="slide2"><img src="/img/${cinemasUser.pictureGalleryTwo}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryThree??>
+                                        <li id="slide3"><img src="/img/${cinemasUser.pictureGalleryThree}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryFour??>
+                                        <li id="slide4"><img src="/img/${cinemasUser.pictureGalleryFour}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryFive??>
+                                        <li id="slide5"><img src="/img/${cinemasUser.pictureGalleryFive}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                                 <ul class="thumbnails">
-                                    <li><a href="#slide1"><img src="/img/${cinemasUser.pictureGalleryOne}" /></a></li>
-                                    <li><a href="#slide2"><img src="/img/${cinemasUser.pictureGalleryTwo}" /></a></li>
-                                    <li><a href="#slide3"><img src="/img/${cinemasUser.pictureGalleryThree}" /></a></li>
-                                    <li><a href="#slide4"><img src="/img/${cinemasUser.pictureGalleryFour}" /></a></li>
-                                    <li><a href="#slide5"><img src="/img/${cinemasUser.pictureGalleryFive}" /></a></li>
+                                    <#if cinemasUser.pictureGalleryOne??>
+                                        <li><a href="#slide1"><img src="/img/${cinemasUser.pictureGalleryOne}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryTwo??>
+                                        <li><a href="#slide2"><img src="/img/${cinemasUser.pictureGalleryTwo}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryThree??>
+                                        <li><a href="#slide3"><img src="/img/${cinemasUser.pictureGalleryThree}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryFour??>
+                                        <li><a href="#slide4"><img src="/img/${cinemasUser.pictureGalleryFour}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if cinemasUser.pictureGalleryFive??>
+                                        <li><a href="#slide5"><img src="/img/${cinemasUser.pictureGalleryFive}" /></a></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                             </div>
                         </div>

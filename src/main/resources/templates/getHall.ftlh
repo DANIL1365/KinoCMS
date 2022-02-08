@@ -21,18 +21,58 @@
                         <div class="media mb40">
                             <div class="cssSlider">
                                 <ul class="slides">
-                                    <li id="slide1"><img src="/img/${hallUser.pictureHallGalleryOne}" alt="" /></li>
-                                    <li id="slide2"><img src="/img/${hallUser.pictureHallGalleryTwo}" alt="" /></li>
-                                    <li id="slide3"><img src="/img/${hallUser.pictureHallGalleryThree}" alt="" /></li>
-                                    <li id="slide4"><img src="/img/${hallUser.pictureHallGalleryFour}" alt="" /></li>
-                                    <li id="slide5"><img src="/img/${hallUser.pictureHallGalleryFive}" alt="" /></li>
+                                    <#if hallUser.pictureHallGalleryOne??>
+                                        <li id="slide1"><img src="/img/${hallUser.pictureHallGalleryOne}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryTwo??>
+                                        <li id="slide2"><img src="/img/${hallUser.pictureHallGalleryTwo}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryThree??>
+                                        <li id="slide3"><img src="/img/${hallUser.pictureHallGalleryThree}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryFour??>
+                                        <li id="slide4"><img src="/img/${hallUser.pictureHallGalleryFour}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryFive??>
+                                        <li id="slide5"><img src="/img/${hallUser.pictureHallGalleryFive}" alt="" /></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                                 <ul class="thumbnails">
-                                    <li><a href="#slide1"><img src="/img/${hallUser.pictureHallGalleryOne}" /></a></li>
-                                    <li><a href="#slide2"><img src="/img/${hallUser.pictureHallGalleryTwo}" /></a></li>
-                                    <li><a href="#slide3"><img src="/img/${hallUser.pictureHallGalleryThree}" /></a></li>
-                                    <li><a href="#slide4"><img src="/img/${hallUser.pictureHallGalleryFour}" /></a></li>
-                                    <li><a href="#slide5"><img src="/img/${hallUser.pictureHallGalleryFive}" /></a></li>
+                                    <#if hallUser.pictureHallGalleryOne??>
+                                        <li><a href="#slide1"><img src="/img/${hallUser.pictureHallGalleryOne}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryTwo??>
+                                        <li><a href="#slide2"><img src="/img/${hallUser.pictureHallGalleryTwo}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryThree??>
+                                        <li><a href="#slide3"><img src="/img/${hallUser.pictureHallGalleryThree}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryFour??>
+                                        <li><a href="#slide4"><img src="/img/${hallUser.pictureHallGalleryFour}" /></a></li>
+                                    <#else>
+
+                                    </#if>
+                                    <#if hallUser.pictureHallGalleryFive??>
+                                        <li><a href="#slide5"><img src="/img/${hallUser.pictureHallGalleryFive}" /></a></li>
+                                    <#else>
+
+                                    </#if>
                                 </ul>
                             </div>
                         </div>

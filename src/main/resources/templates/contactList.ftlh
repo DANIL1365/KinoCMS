@@ -29,9 +29,9 @@
                                         <td>${contactPage.dateCreation!" "}</td>
                                         <td><#if (contactPage.onOf = true)> <p>Вкл</p>
                                             <#else><p>Выкл</p></td></#if>
-                                        <td><a href="/contactPage/${contactPage.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+                                        <td><a href="/contactPage/${contactPage.id}"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
                                          <#if (contactPage.id > 321)>
-                                            <a href="/deleteContactPage/${contactPage.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
+                                            <a href="/deleteContactPage/${contactPage.id}"><img class="img-fluid" src="/plugins/img/bin-delete.png"></a> </td>
                                         <#else>
                                     </#if>
 

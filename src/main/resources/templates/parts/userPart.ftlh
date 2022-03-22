@@ -22,7 +22,7 @@
         <!-- JQVMap -->
         <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css" />
         <!-- Theme style -->
-        <link rel="stylesheet" href="/dist/css/adminlte.min.css" />
+        <link rel="stylesheet" href="/plugins/css/adminlte.min.css" />
         <!-- overlayScrollbars -->
         <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css" />
         <!-- Daterange picker -->
@@ -32,7 +32,7 @@
 
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="/dist/css/alt/userPart.css" />
+        <link rel="stylesheet" href="/plugins/css/userPart.css" />
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ti-icons@0.1.2/css/themify-icons.css">
@@ -43,14 +43,14 @@
     </#if>
     </#list>
     <div class="wrapper">
-        <img src="/dist/img/kinobanner.png" width="100%"
+        <img src="/plugins/img/kinobanner.png" width="100%"
              height="90">
 
         <!-- Navbar -->
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light mt-1"  style="background-color: white;">
                 <a href="/userPartMain">
-                    <img src="/dist/img/logo.png" width="100" height="70">
+                    <img src="/plugins/img/logo.png" width="100" height="70">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
                     <span class="navbar-toggler-icon"></span>

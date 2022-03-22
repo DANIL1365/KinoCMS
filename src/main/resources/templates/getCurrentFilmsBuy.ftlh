@@ -37,7 +37,7 @@
                         <div class="text-start mb-1-6 wow fadeIn">
                             <h2 class="mb-0 text-primary">Зал</h2>
                         </div>
-                        <img src="/dist/img/kino_hall2.jpg" class="img-fluid" >
+                        <img src="/plugins/img/kino_hall2.jpg" class="img-fluid" >
                         </div>
                     </div>
                 <div class="wow fadeIn">

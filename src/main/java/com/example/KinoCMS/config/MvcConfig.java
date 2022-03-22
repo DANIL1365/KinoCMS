@@ -49,8 +49,6 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/build/**")
                 .addResourceLocations("classpath:/build/");
-        registry.addResourceHandler("/dist/**")
-                .addResourceLocations("classpath:/dist/");
         registry.addResourceHandler("/node_modules/**")
                 .addResourceLocations("classpath:/node_modules/");
         registry.addResourceHandler("/pages/**")
@@ -58,4 +56,6 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/plugins/**")
                 .addResourceLocations("classpath:/plugins/");
     }
+
+
 }

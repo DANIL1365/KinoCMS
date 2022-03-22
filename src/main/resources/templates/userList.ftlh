@@ -35,8 +35,8 @@
                                     <td>${user.address!" "}</td>
                                     <td>${user.numberPhone!" "}</td>
                                     <td><#list user.roles as role>${role}<#sep>, </#list></td>
-                                    <td><a href="/user/${user.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
-                                        <a href="/user/delete/${user.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
+                                    <td><a href="/user/${user.id}"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
+                                        <a href="/user/delete/${user.id}"><img class="img-fluid" src="/plugins/img/bin-delete.png"></a> </td>
                                 </tr>
 
                                 </#list>

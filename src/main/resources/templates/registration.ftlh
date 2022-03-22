@@ -4,5 +4,5 @@
 <@c.page>
     <div class="card-header"><h3 class="card-title">Регистрация</h3></div>
     ${messages?ifExists}
-<@r.login "/registration" true/>
+<@r.login "./registration" true/>
 </@c.page>

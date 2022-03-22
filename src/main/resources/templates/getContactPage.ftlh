@@ -29,7 +29,7 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="card border-0 mb-grid-gutter">
                             <a class="card-img-tiles">
-                                <div class="main-img"><img src="/dist/img/multipleks.jpg" alt="Clothing"></div>
+                                <div class="main-img"><img src="/plugins/img/multipleks.jpg" alt="Clothing"></div>
                                 <div class="thumblist"><img src="/img/${contactPage.contactLogo}" alt="Clothing"><img src="/img/${contactPage.mapCoordinates}" alt="Clothing"></div>
                             </a>
                             <div class="card-body border mt-n1 py-4 text-center">

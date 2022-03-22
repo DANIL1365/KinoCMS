@@ -29,7 +29,7 @@
                                     <td>${mainPages.dateMainCreation!" "}</td>
                                     <td><#if (mainPages.onOf = true)> <p>Вкл</p>
                                         <#else><p>Выкл</p></td></#if>
-                                    <td><a href="/mainPage/${mainPages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+                                    <td><a href="/mainPage/${mainPages.id}"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
 
                                 </tr>
 
@@ -41,9 +41,9 @@
                                         <td>${pagePages.dateCreation!" "}</td>
                                         <td><#if (pagePages.onOf = true)> <p>Вкл</p>
                                             <#else><p>Выкл</p></td></#if>
-                                        <td><a href="/pagePages/${pagePages.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+                                        <td><a href="/pagePages/${pagePages.id}"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
                                             <#if (pagePages.id > 316)>
-                                            <a href="/deletePage/${pagePages.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
+                                            <a href="/deletePage/${pagePages.id}"><img class="img-fluid" src="/plugins/img/bin-delete.png"></a> </td>
                                         <#else>
 
                                         </#if>
@@ -59,7 +59,7 @@
                                                 <#if !(contactPage?has_next)>${contactPage.dateCreation}</#if>
                                             </#list></td>
                                     <td>Вкл</td>
-                                    <td><a href="/contactPage"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
+                                    <td><a href="/contactPage"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
 
                                 </tr>
 

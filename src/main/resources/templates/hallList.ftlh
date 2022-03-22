@@ -25,8 +25,8 @@
                                 <tr>
                                     <td>${hall.hallNumber!" "}</td>
                                     <td>${hall.dateCreation!" "}</td>
-                                    <td><a href="/hall/${hall.id}"><img class="img-fluid" src="/dist/img/Edit_icon.png"></a>
-                                        <a href="/deleteHall/${hall.id}"><img class="img-fluid" src="/dist/img/bin-delete.png"></a> </td>
+                                    <td><a href="/hall/${hall.id}"><img class="img-fluid" src="/plugins/img/Edit_icon.png"></a>
+                                        <a href="/deleteHall/${hall.id}"><img class="img-fluid" src="/plugins/img/bin-delete.png"></a> </td>
                                 </tr>
 
                                 </#list>

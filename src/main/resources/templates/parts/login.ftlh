@@ -139,7 +139,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                                 <input type="hidden" name="_csrf" value="${_csrf.token}" />
-                                <#if !isRegisterForm><a href="/registration">Add new user</a></#if>
+                                <#if !isRegisterForm><a href="./registration">Add new user</a></#if>
                                 <button class="btn btn-primary" type="submit">
                                     <#if isRegisterForm>Create<#else>Sign In</#if>
                                 </button>
@@ -164,7 +164,7 @@
 
 
 <#macro logout>
-    <form action="/logout" method="post">
+    <form action="./logout" method="post">
         <input type="hidden" name="_csrf" value="${_csrf.token}" />
         <button class="btn btn-primary" type="submit">Sign Out</button>
     </form>

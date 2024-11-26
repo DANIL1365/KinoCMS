@@ -4,7 +4,7 @@ import com.example.KinoCMS.domain.News;
 
 import java.util.List;
 
-
+//
 public interface NewsService {
 
     void createNews(News news);

@@ -1,7 +1,7 @@
 <#import "parts/common.ftlh" as c>
 
 
-
+//
 <@c.page>
 <form method="get" action="/news" class="row g-3">
     <div class="col-auto">

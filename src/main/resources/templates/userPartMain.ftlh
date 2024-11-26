@@ -1,5 +1,5 @@
 <#import "parts/userPart.ftlh" as u>
-
+//
 <@u.pageUser>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

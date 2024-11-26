@@ -187,7 +187,7 @@ public class UpdateSoonFilmsController {
 
         model.addAttribute("soon1", soon1);
         // model.put("filter","");
-// new
+
         return "redirect:/main";
     }
 }

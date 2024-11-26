@@ -5,7 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-
+//
 @Entity
 @Table(name ="soon_films")
 public class SoonFilms implements Serializable {

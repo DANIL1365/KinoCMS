@@ -182,7 +182,7 @@ public class HallController {
         Iterable<Hall> halls = hallService.getAllHall();
 
         model.addAttribute("halls", halls);
-        // model.put("filter","");
+
 
         return "redirect:/hallList";
     }

@@ -118,7 +118,7 @@ public class TopSliderController {
         Iterable<TopSlider> sliders = topSliderRepo.findAll();
 
         model.put("sliders", sliders);
-        // model.put("filter","");
+
 
         return "redirect:/banners";
     }

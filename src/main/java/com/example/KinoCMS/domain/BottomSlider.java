@@ -29,7 +29,7 @@ public class BottomSlider {
         this.fourthImage = fourthImage;
         this.fifthImage = fifthImage;
     }
-
+//
     public Long getId() {
         return id;
     }

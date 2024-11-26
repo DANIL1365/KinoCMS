@@ -2,7 +2,7 @@ package com.example.KinoCMS.service;
 
 import com.example.KinoCMS.domain.ContactPage;
 
-
+//
 public interface ContactPageService {
 
     void createContactPage(ContactPage contactPage);

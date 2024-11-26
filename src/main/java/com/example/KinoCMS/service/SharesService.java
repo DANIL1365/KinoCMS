@@ -3,7 +3,7 @@ package com.example.KinoCMS.service;
 import com.example.KinoCMS.domain.Shares;
 import org.springframework.stereotype.Service;
 
-
+//
 public interface SharesService {
 
     void createShares(Shares shares);

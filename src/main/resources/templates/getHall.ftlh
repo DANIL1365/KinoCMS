@@ -1,5 +1,5 @@
 <#import "parts/userPart.ftlh" as u>
-
+//
 <@u.pageUser>
     <div class="container pb50">
         <img src="/img/${hallUser.topBanner}" alt="" class="img-fluid mb30">

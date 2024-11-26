@@ -1,6 +1,6 @@
 <#import "parts/common.ftlh" as c>
 
-
+//
 <@c.page>
     <form method="get" action="/cinemas" class="row g-3">
         <div class="col-auto">

@@ -5,7 +5,7 @@ import com.example.KinoCMS.repos.PagePagesRepo;
 import com.example.KinoCMS.service.PagePagesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//
 @Service
 public class PagePagesServiceImpl implements PagePagesService {
 

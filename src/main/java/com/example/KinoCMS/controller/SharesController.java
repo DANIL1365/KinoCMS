@@ -165,7 +165,7 @@ public class SharesController {
         Iterable<Shares> shares1 = sharesService.getAllShares();
 
         model.addAttribute("shares1", shares1);
-        // model.put("filter","");
+
 
         return "redirect:/shares";
     }

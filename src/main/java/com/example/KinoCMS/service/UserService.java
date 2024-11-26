@@ -1,7 +1,7 @@
 package com.example.KinoCMS.service;
 
 import com.example.KinoCMS.domain.User;
-
+//
 public interface UserService {
 
     boolean createUser(User user);

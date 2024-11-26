@@ -2,7 +2,7 @@ package com.example.KinoCMS.service;
 
 import com.example.KinoCMS.domain.MainImageBanner;
 import com.example.KinoCMS.domain.News;
-
+//
 public interface MainBannerService {
 
     void createBanner(MainImageBanner mainImageBanner);

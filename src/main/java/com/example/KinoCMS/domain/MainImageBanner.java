@@ -1,7 +1,7 @@
 package com.example.KinoCMS.domain;
 
 import javax.persistence.*;
-
+//
 @Entity
 @Table(name ="main_banner")
 public class MainImageBanner {

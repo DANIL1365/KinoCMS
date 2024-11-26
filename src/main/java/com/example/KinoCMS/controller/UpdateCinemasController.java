@@ -215,7 +215,7 @@ public class UpdateCinemasController {
         Iterable<Cinemas> cinemas1 = cinemasService.getAllCinemas();
 
         model.addAttribute("cinemas1", cinemas1);
-        // model.put("filter","");
+
 
         return "redirect:/cinemas";
     }

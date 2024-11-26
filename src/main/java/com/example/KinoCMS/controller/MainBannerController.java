@@ -75,7 +75,7 @@ public class MainBannerController {
         Iterable<MainImageBanner> banners = mainBannerService.getAllBanners();
 
         model.put("banners", banners);
-        // model.put("filter","");
+
 
         return "redirect:/banners";
     }

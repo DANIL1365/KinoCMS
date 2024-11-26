@@ -5,7 +5,7 @@ import com.example.KinoCMS.repos.MainBannerRepo;
 import com.example.KinoCMS.service.MainBannerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+//
 @Service
 public class MainBannerServiceImpl implements MainBannerService {
 

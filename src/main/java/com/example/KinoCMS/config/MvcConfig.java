@@ -51,5 +51,5 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/plugins/");
     }
 
-
+//
 }

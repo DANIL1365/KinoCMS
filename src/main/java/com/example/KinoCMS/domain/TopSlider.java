@@ -1,7 +1,7 @@
 package com.example.KinoCMS.domain;
 
 import javax.persistence.*;
-
+//
 @Entity
 @Table(name ="top_slider")
 public class TopSlider {

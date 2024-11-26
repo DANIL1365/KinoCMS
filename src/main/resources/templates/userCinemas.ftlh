@@ -1,5 +1,5 @@
 <#import "parts/userPart.ftlh" as u>
-
+//
 <@u.pageUser>
     <div class="text-center">
         <h2>Кинотеатры</h2>

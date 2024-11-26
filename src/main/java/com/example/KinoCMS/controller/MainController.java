@@ -238,7 +238,7 @@ public class MainController {
         Iterable<CurrentFilms> films = filmsService.getAllCurrentFilms();
 
         model.addAttribute("films", films);
-       // model.put("filter","");
+
 
         return "redirect:/main";
     }

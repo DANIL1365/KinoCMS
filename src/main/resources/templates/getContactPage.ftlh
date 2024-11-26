@@ -1,5 +1,5 @@
 <#import "parts/userPart.ftlh" as u>
-
+//
 <@u.pageUser>
     <div class="container">
         <div class="directory-info-row">

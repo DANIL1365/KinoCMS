@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
-
+//
 <@c.page>
     <form action="/user" method="post">
         <section class="content">

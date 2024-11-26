@@ -4,7 +4,7 @@ import com.example.KinoCMS.domain.Hall;
 import com.example.KinoCMS.domain.News;
 
 import java.util.List;
-
+//
 public interface HallService {
 
     void createHall(Hall hall);

@@ -190,7 +190,7 @@ public class NewsController {
         Iterable<News> news1 = newsService.getAllNews();
 
         model.addAttribute("news1", news1);
-        // model.put("filter","");
+
 
         return "redirect:/news";
     }

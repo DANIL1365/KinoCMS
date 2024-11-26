@@ -112,7 +112,7 @@ public class BottomSliderController {
         Iterable<BottomSlider> bottomSliders = bottomSliderRepo.findAll();
 
         model.put("slidersBottom", bottomSliders);
-        // model.put("filter","");
+
 
         return "redirect:/banners";
     }

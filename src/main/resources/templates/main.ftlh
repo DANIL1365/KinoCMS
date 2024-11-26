@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
-
+//
 <@c.page>
 
 <form method="get" action="/main" class="row g-3">

@@ -150,7 +150,7 @@ public class SoonFilmsController {
         Iterable<SoonFilms> soon1 = soonFilmsService.getAllSoonFilms();
 
         model.addAttribute("soon1", soon1);
-       // model.put("filter","");
+
 
         return "redirect:/main";
     }

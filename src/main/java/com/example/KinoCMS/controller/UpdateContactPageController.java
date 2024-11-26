@@ -166,4 +166,3 @@ public class UpdateContactPageController {
         return "redirect:/contactPage";
     }
 }
-// new

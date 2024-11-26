@@ -1,5 +1,5 @@
 <#import "parts/common.ftlh" as c>
-
+//
 <@c.page>
     <form action="/currentFilms" method="post" enctype="multipart/form-data">
         <section class="content">

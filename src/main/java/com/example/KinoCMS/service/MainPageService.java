@@ -1,7 +1,7 @@
 package com.example.KinoCMS.service;
 
 import com.example.KinoCMS.domain.MainPage;
-
+//
 public interface MainPageService {
 
     void createMainPage(MainPage mainPage);

@@ -4,7 +4,7 @@ import com.example.KinoCMS.domain.CurrentFilms;
 import com.example.KinoCMS.domain.SoonFilms;
 
 import java.util.List;
-
+//
 public interface SoonFilmsService {
 
     void createSoonFilm(SoonFilms soonFilms);

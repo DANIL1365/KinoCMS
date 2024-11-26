@@ -209,7 +209,7 @@ public class UpdatePagesController {
             pagePagesService.createPagePages(pagePages);
 
         }
-
+// new
         Iterable<PagePages> pages = pagePagesService.getAllPagePages();
 
         model.addAttribute("pages", pages);

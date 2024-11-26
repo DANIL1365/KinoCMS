@@ -187,7 +187,7 @@ public class UpdateNewsController {
         Iterable<News> news1 = newsService.getAllNews();
 
         model.addAttribute("news1", news1);
-        // model.put("filter","");
+        // new
 
         return "redirect:/news";
     }

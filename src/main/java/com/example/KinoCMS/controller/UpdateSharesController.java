@@ -187,7 +187,7 @@ public class UpdateSharesController {
 
         model.addAttribute("shares1", shares1);
         // model.put("filter","");
-
+// new
         return "redirect:/shares";
     }
 }
